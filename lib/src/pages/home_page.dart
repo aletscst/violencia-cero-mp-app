@@ -4,9 +4,16 @@ import 'package:violencia_cero/src/utils/icono_string_util.dart';
 
 class HomePage extends StatelessWidget {
   final List<OptionMenu> _menuOptions = [
-    new OptionMenu(name: 'Contactos', route: 'contacts', icon: 'phone'),
+    new OptionMenu(
+        name: 'Contactos de Emergencia', route: 'contacts', icon: 'phone'),
     new OptionMenu(name: 'Procedimientos', route: 'procedures', icon: 'book'),
-    new OptionMenu(name: 'Denuncia', route: 'report', icon: 'book')
+    new OptionMenu(name: 'Denuncia', route: 'report', icon: 'denuncia'),
+    new OptionMenu(
+        name: 'Informacion sobre violencia',
+        route: 'infov',
+        icon: 'info_violen'),
+    new OptionMenu(
+        name: 'Centros de atencion', route: 'attention', icon: 'centros_aten'),
   ];
 
   @override
@@ -14,6 +21,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Violencia Cero'),
+        backgroundColor: Colors.pink[200],
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -24,7 +32,7 @@ class HomePage extends StatelessWidget {
 
   List<Widget> _getMenu(BuildContext context) {
     List<Widget> menu = new List<Widget>();
-
+    menu.add(SizedBox(height: 10.0));
     _menuOptions.forEach((option) {
       final optionCard = Card(
         child: Column(
@@ -38,9 +46,12 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        elevation: 6.0,
+        elevation: 9.0,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       );
       menu.add(optionCard);
+      menu.add(SizedBox(height: 10.0));
     });
 
     return menu;
