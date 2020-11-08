@@ -3,6 +3,7 @@ import 'package:violencia_cero/src/pages/attention_center_page.dart';
 import 'package:violencia_cero/src/pages/contacts_page.dart';
 import 'package:violencia_cero/src/pages/home_page.dart';
 import 'package:violencia_cero/src/pages/info_violence_page.dart';
+import 'package:violencia_cero/src/pages/procedure_detail_page.dart';
 import 'package:violencia_cero/src/pages/procedures_page.dart';
 import 'package:violencia_cero/src/pages/report_page.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         'report': (BuildContext context) => ReportPage(),
         'infov': (BuildContext context) => InfoViolencePage(),
         'attention': (BuildContext context) => AttentionCenterPage(),
+        'proceduredetail': (BuildContext context) => ProcedureDetailPage(),
       },
     );
   }

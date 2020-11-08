@@ -27,7 +27,7 @@ class _ContactsPageState extends State<ContactsPage> {
       builder: (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
         if (snapshot.hasData) {
           return ListView(
-            children: _getContacts2(snapshot.data),
+            children: _fillContactList(snapshot.data),
           );
         }
         return Center(
@@ -37,7 +37,7 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  List<Widget> _getContacts2(List<Contact> contactsList) {
+  List<Widget> _fillContactList(List<Contact> contactsList) {
     List<Widget> contacts = new List<Widget>();
     print(contactsList[0].name);
     contactsList.forEach((contact) {
