@@ -7,13 +7,15 @@ class HomePage extends StatelessWidget {
     new OptionMenu(
         name: 'Contactos de Emergencia', route: 'contacts', icon: 'phone'),
     new OptionMenu(name: 'Procedimientos', route: 'procedures', icon: 'book'),
-    new OptionMenu(name: 'Denuncia', route: 'report', icon: 'denuncia'),
+    new OptionMenu(name: 'Denuncia', route: 'login', icon: 'denuncia'),
     new OptionMenu(
         name: 'Informacion sobre violencia',
         route: 'infov',
         icon: 'info_violen'),
     new OptionMenu(
-        name: 'Centros de atencion', route: 'attention', icon: 'centros_aten'),
+        name: 'Centros de atencion',
+        route: 'attentionlist',
+        icon: 'centros_aten'),
   ];
 
   @override
@@ -21,11 +23,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Violencia Cero'),
-        backgroundColor: Colors.pink[200],
+        backgroundColor: Colors.purple[300],
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        children: _getMenu(context),
+      body: Stack(
+        children: <Widget>[
+          ListView(
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            children: _getMenu(context),
+          ),
+        ],
       ),
     );
   }
