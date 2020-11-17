@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:violencia_cero/src/models/parrafo_model.dart';
 import 'package:violencia_cero/src/models/procedure_detail_model.dart';
 import 'package:violencia_cero/src/models/procedure_model.dart';
 import 'package:violencia_cero/src/providers/procedures_provider.dart';
@@ -10,7 +11,7 @@ class ProcedureDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Procedure procedure = ModalRoute.of(context).settings.arguments;
-    print(procedure.nombre);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(procedure.nombre),
@@ -21,18 +22,52 @@ class ProcedureDetailPage extends StatelessWidget {
 
   Widget _getDetail(String idProcedure) {
     return FutureBuilder(
-        future: procedureProvider.getProcedureDetail(idProcedure),
-        builder:
-            (BuildContext context, AsyncSnapshot<ProcedureDetail> snapshot) {
-          if (snapshot.hasData) {
-            return Container(
-              child: Text(snapshot.data.parrafos[0].texto),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+      future: procedureProvider.getProcedureDetail(idProcedure),
+      builder: (BuildContext context, AsyncSnapshot<ProcedureDetail> snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            child: _getParagraphs(snapshot.data.parrafos),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _getParagraphs(List<Parrafo> parrafos) {
+    List<Widget> data = new List<Widget>();
+
+    parrafos.forEach((paragraph) {
+      ListTile title = ListTile(
+        title: Text(
+          paragraph.subtitulo,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black.withOpacity(0.7),
+          ),
+        ),
+      );
+
+      ListTile text = ListTile(
+        title: Text(
+          paragraph.texto,
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Colors.black.withOpacity(0.6),
+          ),
+        ),
+      );
+
+      data..add(title)..add(text);
+    });
+
+    return ListView(
+      children: data,
+    );
   }
 }

@@ -34,20 +34,20 @@ class ProceduresPage extends StatelessWidget {
 
   List<Widget> _fillProceduresList(
       BuildContext context, List<Procedure> contactsList) {
-    List<Widget> contacts = new List<Widget>();
-    contactsList.forEach((contact) {
-      final tempContact = ListTile(
+    List<Widget> procedures = new List<Widget>();
+    contactsList.forEach((procedure) {
+      final tempProcedure = ListTile(
         leading: Icon(Icons.article),
-        title: Text(contact.nombre),
+        title: Text(procedure.nombre),
         trailing: Icon(Icons.keyboard_arrow_right),
         onTap: () => {
-          Navigator.pushNamed(context, 'proceduredetail', arguments: contact)
+          Navigator.pushNamed(context, 'proceduredetail', arguments: procedure)
         },
       );
-      contacts.add(tempContact);
-      contacts.add(Divider());
+      procedures.add(tempProcedure);
+      procedures.add(Divider());
     });
 
-    return contacts;
+    return procedures;
   }
 }
