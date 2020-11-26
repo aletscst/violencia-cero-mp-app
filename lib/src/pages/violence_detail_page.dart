@@ -10,14 +10,14 @@ class ViolenceDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ViolenceInformation violenceData =
-        ModalRoute.of(context).settings.arguments;
+    final Datum violenceData = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(violenceData.nombre),
+        backgroundColor: Colors.purple[300],
       ),
-      body: _getDetail(violenceData.id),
+      body: _getDetail(violenceData.id.toString()),
     );
   }
 

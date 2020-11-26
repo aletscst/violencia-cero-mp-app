@@ -16,12 +16,11 @@ class AttentionCenterPageState extends State<AttentionCenterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final AttentionCenter attentionCenter =
-        ModalRoute.of(context).settings.arguments;
+    final Datum attentionCenter = ModalRoute.of(context).settings.arguments;
     _markers.add(
       Marker(
         markerId: MarkerId(attentionCenter.nombre),
-        position: LatLng(attentionCenter.lat, attentionCenter.lng),
+        position: LatLng(attentionCenter.lat, attentionCenter.long),
         infoWindow: InfoWindow(
           title: attentionCenter.nombre,
           snippet: attentionCenter.direccion,
@@ -31,6 +30,7 @@ class AttentionCenterPageState extends State<AttentionCenterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(attentionCenter.nombre),
+        backgroundColor: Colors.purple[300],
       ),
       body: Stack(
         children: <Widget>[
@@ -41,10 +41,10 @@ class AttentionCenterPageState extends State<AttentionCenterPage> {
   }
 
 //
-  Widget _getMap(AttentionCenter attCent) {
+  Widget _getMap(Datum attCent) {
     return GoogleMap(
       initialCameraPosition: CameraPosition(
-        target: LatLng(attCent.lat, attCent.lng),
+        target: LatLng(attCent.lat, attCent.long),
         zoom: _zoom,
       ),
       markers: _markers,

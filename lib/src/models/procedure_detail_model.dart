@@ -11,17 +11,20 @@ String procedureDetailToJson(ProcedureDetail data) =>
 class ProcedureDetail {
   ProcedureDetail({
     this.id,
+    this.estatus,
     this.titulo,
     this.parrafos,
   });
 
-  String id;
+  int id;
+  String estatus;
   String titulo;
   List<Parrafo> parrafos;
 
   factory ProcedureDetail.fromJson(Map<String, dynamic> json) =>
       ProcedureDetail(
         id: json["id"],
+        estatus: json["estatus"],
         titulo: json["titulo"],
         parrafos: List<Parrafo>.from(
             json["parrafos"].map((x) => Parrafo.fromJson(x))),
@@ -29,6 +32,7 @@ class ProcedureDetail {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "estatus": estatus,
         "titulo": titulo,
         "parrafos": List<dynamic>.from(parrafos.map((x) => x.toJson())),
       };

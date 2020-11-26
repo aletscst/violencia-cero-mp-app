@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:violencia_cero/src/models/register_model.dart';
+import 'package:violencia_cero/src/models/success_model.dart';
+import 'package:violencia_cero/src/providers/auth_provider.dart';
+
+import 'package:violencia_cero/src/utils/utils.dart' as utils;
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -9,6 +13,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
+  final authProvider = new AuthProvider();
 
   Register register = new Register();
 
@@ -17,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Registro'),
+        backgroundColor: Colors.purple[300],
       ),
       body: _registerForm(),
     );
@@ -24,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _registerForm() {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Form(
         key: formKey,
         child: Column(
@@ -43,8 +49,9 @@ class _RegisterPageState extends State<RegisterPage> {
             _passwordField(),
             SizedBox(height: 10.0),
             _cpField(),
-            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
             _registerButton(),
+            SizedBox(height: 10.0),
           ],
         ),
       ),
@@ -119,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         validator: (value) =>
-            value.length < 11 ? 'Ingrese un Numero Valido' : null,
+            value.length < 8 ? 'Ingrese un Numero Valido' : null,
         onSaved: (value) => register.tel = value,
       ),
     );
@@ -156,7 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         validator: (value) => value.length < 7
-            ? 'Ingrese una contrase;a mayor a 6 caracteres'
+            ? 'Ingrese una contraseña mayor a 6 caracteres'
             : null,
         onSaved: (value) => register.password = value,
       ),
@@ -184,8 +191,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _registerButton() {
     return RaisedButton(
+      color: Colors.purple[300],
       child: Container(
-        child: Text('Registrarme'),
+        child: Text(
+          'Registrarme',
+          style: TextStyle(color: Colors.white, fontSize: 16.0),
+        ),
       ),
       onPressed: () {
         _sendData();
@@ -194,8 +205,21 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _sendData() {
-    formKey.currentState.validate();
-
+    if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
+    //final DataSuccess success = new DataSuccess(
+    //    message: 'Registro exitoso', route1: 'home', route2: 'solicitante');
+    //Navigator.pushReplacementNamed(context, 'success', arguments: success);
+    final resp = authProvider.register(register);
+
+    resp.then((response) {
+      if (response.status) {
+        final DataSuccess success = new DataSuccess(
+            message: 'Registro exitoso', route1: 'home', route2: 'solicitante');
+        Navigator.pushReplacementNamed(context, 'success', arguments: success);
+      } else {
+        utils.showAlert(context, 'Error', response.message);
+      }
+    });
   }
 }

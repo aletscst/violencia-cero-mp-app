@@ -22,11 +22,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Violencia Cero'),
+        title: Text('Home'),
         backgroundColor: Colors.purple[300],
       ),
       body: Stack(
         children: <Widget>[
+          _design(context),
           ListView(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             children: _getMenu(context),
@@ -36,9 +37,27 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _design(BuildContext context) {
+    final sizeScreen = MediaQuery.of(context).size;
+    return Container(
+      height: sizeScreen.height * 0.35,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.purple[300],
+      ),
+      child: Container(
+        alignment: Alignment(0.0, -0.5),
+        child: Image(
+          image: AssetImage('assets/images/VceroLogo.png'),
+        ),
+      ),
+    );
+  }
+
   List<Widget> _getMenu(BuildContext context) {
+    final sizeScreen = MediaQuery.of(context).size;
     List<Widget> menu = new List<Widget>();
-    menu.add(SizedBox(height: 10.0));
+    menu.add(SizedBox(height: sizeScreen.height * 0.25));
     _menuOptions.forEach((option) {
       final optionCard = Card(
         child: Column(

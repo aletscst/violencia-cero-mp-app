@@ -1,22 +1,42 @@
 import 'dart:convert';
 
-ViolenceInformation violenceInformationFromJson(String str) =>
+ViolenceInformation violenceInfoFromJson(String str) =>
     ViolenceInformation.fromJson(json.decode(str));
 
-String violenceInformationToJson(ViolenceInformation data) =>
+String violenceInfoToJson(ViolenceInformation data) =>
     json.encode(data.toJson());
 
 class ViolenceInformation {
   ViolenceInformation({
+    this.status,
+    this.data,
+  });
+
+  bool status;
+  List<Datum> data;
+
+  factory ViolenceInformation.fromJson(Map<String, dynamic> json) =>
+      ViolenceInformation(
+        status: json["status"],
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
+}
+
+class Datum {
+  Datum({
     this.id,
     this.nombre,
   });
 
-  String id;
+  int id;
   String nombre;
 
-  factory ViolenceInformation.fromJson(Map<String, dynamic> json) =>
-      ViolenceInformation(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
         nombre: json["nombre"],
       );

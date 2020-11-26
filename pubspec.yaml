@@ -32,6 +32,7 @@ dependencies:
   google_maps_flutter: ^0.5.5
   permission: ^0.1.7
   http:
+  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,7 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

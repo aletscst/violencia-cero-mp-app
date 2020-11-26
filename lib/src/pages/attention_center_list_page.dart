@@ -12,6 +12,7 @@ class AttentionCenterListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Centros de Atencion'),
+        backgroundColor: Colors.purple[300],
       ),
       body: _getAttentionCenters(context),
     );
@@ -20,8 +21,7 @@ class AttentionCenterListPage extends StatelessWidget {
   Widget _getAttentionCenters(BuildContext context) {
     return FutureBuilder(
       future: _attCentProvider.getAttentionCenters(),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<AttentionCenter>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<AttentionCenter> snapshot) {
         if (snapshot.hasData) {
           return ListView(
             children: _fillAttCentsList(context, snapshot.data),
@@ -36,14 +36,20 @@ class AttentionCenterListPage extends StatelessWidget {
   }
 
   List<Widget> _fillAttCentsList(
-      BuildContext context, List<AttentionCenter> attCentsList) {
+      BuildContext context, AttentionCenter attCentsList) {
     List<Widget> attCents = new List<Widget>();
-    attCentsList.forEach((attCent) {
+    attCentsList.data.forEach((attCent) {
       final tempAttCent = ListTile(
-        leading: Icon(Icons.corporate_fare),
+        leading: Icon(
+          Icons.corporate_fare,
+          color: Colors.purple[300],
+        ),
         title: Text(attCent.nombre),
         subtitle: Text(attCent.descripcion),
-        trailing: Icon(Icons.keyboard_arrow_right),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.purple[300],
+        ),
         onTap: () =>
             {Navigator.pushNamed(context, 'attention', arguments: attCent)},
       );

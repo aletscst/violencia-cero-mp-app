@@ -5,25 +5,13 @@ import 'package:violencia_cero/src/models/attention_center_model.dart';
 import 'package:violencia_cero/src/utils/variables_utils.dart' as utils;
 
 class AttentionCenterProvider {
-  final String _url = utils.generalPath;
+  final String _url = utils.generalPath + '/centros';
 
-  Future<List<AttentionCenter>> getAttentionCenters() async {
-    final url = '$_url/attention-center';
-
-    final response = await http.get(url);
+  Future<AttentionCenter> getAttentionCenters() async {
+    final response = await http.get(_url);
 
     if (response.statusCode == 200) {
-      final attentionCentJson = jsonDecode(response.body);
-      final attentionCentResp = List.from(attentionCentJson);
-      final List<AttentionCenter> attentionCent = new List<AttentionCenter>();
-
-      attentionCentResp.forEach((element) {
-        final AttentionCenter attentionCenter =
-            AttentionCenter.fromJson(element);
-        attentionCent.add(attentionCenter);
-      });
-
-      return attentionCent;
+      return AttentionCenter.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load contacts');
     }

@@ -10,13 +10,14 @@ class ProcedureDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Procedure procedure = ModalRoute.of(context).settings.arguments;
+    final Datum procedure = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(procedure.nombre),
+        backgroundColor: Colors.purple[300],
       ),
-      body: _getDetail(procedure.id),
+      body: _getDetail(procedure.id.toString()),
     );
   }
 

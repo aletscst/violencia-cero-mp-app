@@ -10,6 +10,7 @@ class InfoViolencePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Inforacion Sobre Violencia'),
+        backgroundColor: Colors.purple[300],
       ),
       body: _getListData(context),
     );
@@ -18,8 +19,8 @@ class InfoViolencePage extends StatelessWidget {
   Widget _getListData(BuildContext context) {
     return FutureBuilder(
       future: _violenceProvider.getListViolenceInfo(),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<ViolenceInformation>> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<ViolenceInformation> snapshot) {
         if (snapshot.hasData) {
           return ListView(
             children: _fillViolenceInfList(context, snapshot.data),
@@ -34,13 +35,19 @@ class InfoViolencePage extends StatelessWidget {
   }
 
   List<Widget> _fillViolenceInfList(
-      BuildContext context, List<ViolenceInformation> dataList) {
+      BuildContext context, ViolenceInformation dataList) {
     List<Widget> listDataViolence = new List<Widget>();
-    dataList.forEach((item) {
+    dataList.data.forEach((item) {
       final tempItem = ListTile(
-        leading: Icon(Icons.article),
+        leading: Icon(
+          Icons.article,
+          color: Colors.purple[300],
+        ),
         title: Text(item.nombre),
-        trailing: Icon(Icons.keyboard_arrow_right),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.purple[300],
+        ),
         onTap: () =>
             {Navigator.pushNamed(context, 'violencedetail', arguments: item)},
       );

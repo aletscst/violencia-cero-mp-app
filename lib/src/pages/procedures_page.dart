@@ -10,6 +10,7 @@ class ProceduresPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Procedimientos'),
+        backgroundColor: Colors.purple[300],
       ),
       body: _getProcedures(context),
     );
@@ -18,7 +19,7 @@ class ProceduresPage extends StatelessWidget {
   Widget _getProcedures(BuildContext context) {
     return FutureBuilder(
       future: _procedureProvider.getListProcedures(),
-      builder: (BuildContext context, AsyncSnapshot<List<Procedure>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Procedure> snapshot) {
         if (snapshot.hasData) {
           return ListView(
             children: _fillProceduresList(context, snapshot.data),
@@ -33,13 +34,19 @@ class ProceduresPage extends StatelessWidget {
   }
 
   List<Widget> _fillProceduresList(
-      BuildContext context, List<Procedure> contactsList) {
+      BuildContext context, Procedure contactsList) {
     List<Widget> procedures = new List<Widget>();
-    contactsList.forEach((procedure) {
+    contactsList.data.forEach((procedure) {
       final tempProcedure = ListTile(
-        leading: Icon(Icons.article),
+        leading: Icon(
+          Icons.article,
+          color: Colors.purple[300],
+        ),
         title: Text(procedure.nombre),
-        trailing: Icon(Icons.keyboard_arrow_right),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.purple[300],
+        ),
         onTap: () => {
           Navigator.pushNamed(context, 'proceduredetail', arguments: procedure)
         },

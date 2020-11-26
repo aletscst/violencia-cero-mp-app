@@ -16,6 +16,7 @@ class _ContactsPageState extends State<ContactsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Contactos'),
+        backgroundColor: Colors.purple[300],
       ),
       body: _getContacts(),
     );
@@ -24,7 +25,7 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget _getContacts() {
     return FutureBuilder(
       future: contactProvider.getContacts(),
-      builder: (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Contacts> snapshot) {
         if (snapshot.hasData) {
           return ListView(
             children: _fillContactList(snapshot.data),
@@ -37,12 +38,14 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  List<Widget> _fillContactList(List<Contact> contactsList) {
+  List<Widget> _fillContactList(Contacts contactsList) {
     List<Widget> contacts = new List<Widget>();
-    print(contactsList[0].name);
-    contactsList.forEach((contact) {
+    contactsList.data.forEach((contact) {
       final tempContact = ListTile(
-        leading: Icon(Icons.support_agent),
+        leading: Icon(
+          Icons.support_agent,
+          color: Colors.purple[300],
+        ),
         title: Text(contact.name),
         subtitle: Text(contact.description),
         onTap: () => {launch('tel:' + contact.number)},

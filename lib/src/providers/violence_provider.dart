@@ -8,38 +8,29 @@ import 'package:violencia_cero/src/utils/variables_utils.dart' as utils;
 class ViolenceProvider {
   final String _url = utils.generalPath;
 
-  Future<List<ViolenceInformation>> getListViolenceInfo() async {
-    final url = '$_url/violence';
+  Future<ViolenceInformation> getListViolenceInfo() async {
+    final url = '$_url/informacion';
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final violenceJson = jsonDecode(response.body);
-      final violenceResp = List.from(violenceJson);
-      final List<ViolenceInformation> vioInfo = new List<ViolenceInformation>();
-
-      violenceResp.forEach((element) {
-        final ViolenceInformation contact =
-            ViolenceInformation.fromJson(element);
-        vioInfo.add(contact);
-      });
-
-      return vioInfo;
+      return ViolenceInformation.fromJson(jsonDecode(response.body));
+      ;
     } else {
-      throw Exception('Failed to load contacts');
+      throw Exception('Failed to load violence information');
     }
   }
 
   Future<ViolenceInfoDetail> getViolenceInfoDetail(
       String idVioleneceInf) async {
-    final url = '$_url/violence/$idVioleneceInf';
+    final url = '$_url/informacion/$idVioleneceInf';
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       return ViolenceInfoDetail.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load contacts');
+      throw Exception('Failed to load violence detail');
     }
   }
 }

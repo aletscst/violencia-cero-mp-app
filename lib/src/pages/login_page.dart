@@ -1,7 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:violencia_cero/src/models/login_model.dart';
+import 'package:violencia_cero/src/providers/auth_provider.dart';
+import 'package:violencia_cero/src/share_prefs/user_preferences.dart';
 
-class LoginPage extends StatelessWidget {
+import 'package:violencia_cero/src/utils/utils.dart' as utils;
+
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
+  final prefs = new UserPreferences();
+  final authProvider = AuthProvider();
+  Login _login = new Login();
+
+  @override
+  void initState() {
+    super.initState();
+    print(prefs.token);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,6 +33,7 @@ class LoginPage extends StatelessWidget {
   Widget _loginForm(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
+        key: formKey,
         child: Column(
           children: <Widget>[
             SafeArea(
@@ -32,7 +54,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 30.0),
             _passrowdField(),
             SizedBox(height: 30.0),
-            _loginButton(),
+            _loginButton(context),
             SizedBox(height: 10.0),
             _registerButton(context),
             SizedBox(height: 10.0),
@@ -46,14 +68,17 @@ class LoginPage extends StatelessWidget {
   Widget _emailField() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40.0),
-      child: TextField(
+      child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-            icon: Icon(
-              Icons.alternate_email,
-              color: Colors.purple[300],
-            ),
-            labelText: 'Correo Electronico'),
+          icon: Icon(
+            Icons.alternate_email,
+            color: Colors.purple[300],
+          ),
+          labelText: 'Correo Electronico',
+        ),
+        validator: (value) => value.contains('@') ? null : 'email invalido',
+        onSaved: (value) => _login.email = value,
       ),
     );
   }
@@ -61,7 +86,7 @@ class LoginPage extends StatelessWidget {
   Widget _passrowdField() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40.0),
-      child: TextField(
+      child: TextFormField(
         obscureText: true,
         decoration: InputDecoration(
           icon: Icon(
@@ -70,18 +95,36 @@ class LoginPage extends StatelessWidget {
           ),
           labelText: 'contraseña',
         ),
+        validator: (value) => value.length < 6
+            ? 'Ingrese una contraseña mayor a 6 caracteres'
+            : null,
+        onSaved: (value) => _login.password = value,
       ),
     );
   }
 
-  Widget _loginButton() {
+  Widget _loginButton(BuildContext context) {
     return RaisedButton(
       child: Container(
         child: Text('Ingresar'),
       ),
       color: Colors.purple[300],
       textColor: Colors.white,
-      onPressed: () {},
+      onPressed: () {
+        if (!formKey.currentState.validate()) return;
+        formKey.currentState.save();
+        final resp = authProvider.login(_login);
+        resp.then((value) {
+          if (value["status"]) {
+            prefs.token = value["token"];
+            prefs.userId = value["id"];
+
+            Navigator.pushReplacementNamed(context, 'solicitante');
+          } else {
+            utils.showAlert(context, 'error', value["message"]);
+          }
+        });
+      },
     );
   }
 

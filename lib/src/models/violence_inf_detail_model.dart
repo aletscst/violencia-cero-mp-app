@@ -11,17 +11,20 @@ String violenceInfoDetailToJson(ViolenceInfoDetail data) =>
 class ViolenceInfoDetail {
   ViolenceInfoDetail({
     this.id,
+    this.estatus,
     this.titulo,
     this.parrafos,
   });
 
-  String id;
+  int id;
+  String estatus;
   String titulo;
   List<Parrafo> parrafos;
 
   factory ViolenceInfoDetail.fromJson(Map<String, dynamic> json) =>
       ViolenceInfoDetail(
         id: json["id"],
+        estatus: json["estatus"],
         titulo: json["titulo"],
         parrafos: List<Parrafo>.from(
             json["parrafos"].map((x) => Parrafo.fromJson(x))),
@@ -29,6 +32,7 @@ class ViolenceInfoDetail {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "estatus": estatus,
         "titulo": titulo,
         "parrafos": List<dynamic>.from(parrafos.map((x) => x.toJson())),
       };
