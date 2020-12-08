@@ -1,6 +1,18 @@
-final String generalPath = 'http://192.168.0.17:3000';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+final String generalPath = 'http://201.116.12.210:3000';
 
 final List<int> ages = _getAges();
+
+final List<Color> colors = [
+  Color.fromRGBO(187, 98, 218, 1.0),
+  Color.fromRGBO(140, 99, 218, 1.0),
+  Color.fromRGBO(97, 71, 197, 1.0),
+  Color.fromRGBO(244, 99, 212, 1.0),
+];
 
 final List<String> scolarships = [
   'Ninguna',
@@ -73,3 +85,42 @@ List<int> _getAges() {
 
   return ages;
 }
+
+final BottomAppBar phoneBar = BottomAppBar(
+  shape: const CircularNotchedRectangle(),
+  child: Container(
+    height: 50.0,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        IconButton(
+          icon: Image(
+            image: AssetImage('assets/icons/tel.png'),
+          ),
+          onPressed: () => launch('tel:5558623494'),
+        ),
+        IconButton(
+          icon: Image(
+            image: AssetImage('assets/icons/whats.png'),
+          ),
+          onPressed: () async {
+            if (Platform.isIOS) {
+              final whatsappUrl = 'whatsapp://wa.me/525543236768';
+              await canLaunch(whatsappUrl)
+                  ? launch(whatsappUrl)
+                  : print(
+                      "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
+            } else {
+              final whatsappUrl =
+                  'whatsapp://send?text=Hola&phone=+525543236768&abid=+525543236768';
+              await canLaunch(whatsappUrl)
+                  ? launch(whatsappUrl)
+                  : print(
+                      "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
+            }
+          },
+        ),
+      ],
+    ),
+  ),
+);

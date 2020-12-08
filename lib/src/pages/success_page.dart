@@ -39,18 +39,21 @@ class SuccessPage extends StatelessWidget {
                         context, ModalRoute.withName(success.route1));
                   },
                 ),
-                RaisedButton(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
-                  color: Colors.purple[300],
-                  child: Text(
-                    'Continuar',
-                    style: TextStyle(color: Colors.white, fontSize: 19.0),
+                Visibility(
+                  visible: success.route2 != 'home',
+                  child: RaisedButton(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                    color: Colors.purple[300],
+                    child: Text(
+                      'Continuar',
+                      style: TextStyle(color: Colors.white, fontSize: 19.0),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          success.route2, ModalRoute.withName('inicio'));
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        'solicitante', ModalRoute.withName('home'));
-                  },
                 ),
               ],
             )

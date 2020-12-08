@@ -4,6 +4,7 @@ import 'package:violencia_cero/src/models/success_model.dart';
 import 'package:violencia_cero/src/providers/report_provider.dart';
 
 import 'package:violencia_cero/src/utils/utils.dart' as utils;
+import 'package:violencia_cero/src/utils/variables_utils.dart' as var_utils;
 
 class ReportPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class ReportPage extends StatefulWidget {
 class _ReportPageState extends State<ReportPage> {
   final formKey = GlobalKey<FormState>();
   final reportProvider = new ReportProvider();
+  bool _load = false;
 
   List<String> _helpOpc = [];
 
@@ -21,12 +23,29 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     _report = ModalRoute.of(context).settings.arguments;
+    final sizeScreen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Denuncia'),
         backgroundColor: Colors.purple[300],
       ),
-      body: _reportForm(),
+      body: Stack(children: [
+        _fondoDecoration(sizeScreen),
+        _reportForm(),
+      ]),
+      bottomNavigationBar: var_utils.phoneBar,
+    );
+  }
+
+  Widget _fondoDecoration(Size sizeScreen) {
+    return Container(
+      height: sizeScreen.height - 50,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/fondo.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 
@@ -125,16 +144,16 @@ class _ReportPageState extends State<ReportPage> {
           style: TextStyle(color: Colors.white, fontSize: 16.0),
         ),
       ),
-      onPressed: () {
-        _send();
-      },
+      onPressed: () => _load ? null : _send(),
     );
   }
 
   void _send() {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
-
+    setState(() {
+      _load = true;
+    });
     String help = '';
 
     _helpOpc.forEach((element) {
@@ -149,7 +168,7 @@ class _ReportPageState extends State<ReportPage> {
       if (response.status) {
         final DataSuccess success = new DataSuccess(
             message: 'Denuncia Envida, Nos comunicaremos contigo pronto',
-            route1: 'home',
+            route1: 'inicio',
             route2: 'home');
         Navigator.pushReplacementNamed(context, 'success', arguments: success);
       } else {

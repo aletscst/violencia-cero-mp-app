@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:violencia_cero/src/models/report_model.dart';
 
+import 'package:violencia_cero/src/utils/utils.dart' as utils;
 import 'package:violencia_cero/src/utils/variables_utils.dart'
     as variable_utils;
 
@@ -20,12 +21,31 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
   @override
   Widget build(BuildContext context) {
     _report.solicitante = ModalRoute.of(context).settings.arguments;
+    final sizeScreen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Persona Señalada de Violentar'),
         backgroundColor: Colors.purple[300],
       ),
-      body: _denunciadoForm(),
+      body: Stack(
+        children: [
+          _fondoDecoration(sizeScreen),
+          _denunciadoForm(),
+        ],
+      ),
+      bottomNavigationBar: variable_utils.phoneBar,
+    );
+  }
+
+  Widget _fondoDecoration(Size sizeScreen) {
+    return Container(
+      height: sizeScreen.height - 50,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/fondo.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 
@@ -212,7 +232,7 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
         initialValue: denunciado.domicilio,
         maxLines: 2,
         decoration: InputDecoration(
-          labelText: 'Domicilio Actial',
+          labelText: 'Domicilio Actual',
           icon: Icon(
             Icons.house,
             color: Colors.purple[300],
@@ -236,8 +256,15 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
             color: Colors.purple[300],
           ),
         ),
-        validator: (value) =>
-            value.length != 5 ? 'Ingrese un C.P. Valido' : null,
+        validator: (value) {
+          if (!utils.isNumeric(value)) {
+            return 'Solo se aceptan numeros';
+          }
+          if (value.length != 5) {
+            return 'Ingrese un Numero Valido';
+          }
+          return null;
+        },
         onSaved: (value) => denunciado.codigoPostal = value,
       ),
     );

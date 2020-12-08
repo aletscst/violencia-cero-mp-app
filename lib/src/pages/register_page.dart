@@ -5,6 +5,7 @@ import 'package:violencia_cero/src/models/success_model.dart';
 import 'package:violencia_cero/src/providers/auth_provider.dart';
 
 import 'package:violencia_cero/src/utils/utils.dart' as utils;
+import 'package:violencia_cero/src/utils/variables_utils.dart' as var_utils;
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -15,16 +16,37 @@ class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
   final authProvider = new AuthProvider();
 
+  bool _load = false;
+
+  TextEditingController passwordCtrl = new TextEditingController();
+
   Register register = new Register();
 
   @override
   Widget build(BuildContext context) {
+    final sizeScreen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Registro'),
         backgroundColor: Colors.purple[300],
       ),
-      body: _registerForm(),
+      body: Stack(children: [
+        _fondoDecoration(sizeScreen),
+        _registerForm(),
+      ]),
+      bottomNavigationBar: var_utils.phoneBar,
+    );
+  }
+
+  Widget _fondoDecoration(Size sizeScreen) {
+    return Container(
+      height: sizeScreen.height - 50,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/fondo.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 
@@ -47,6 +69,8 @@ class _RegisterPageState extends State<RegisterPage> {
             _emailField(),
             SizedBox(height: 10.0),
             _passwordField(),
+            SizedBox(height: 10.0),
+            _passwordValidateField(),
             SizedBox(height: 10.0),
             _cpField(),
             SizedBox(height: 20.0),
@@ -125,8 +149,15 @@ class _RegisterPageState extends State<RegisterPage> {
             color: Colors.purple[300],
           ),
         ),
-        validator: (value) =>
-            value.length < 8 ? 'Ingrese un Numero Valido' : null,
+        validator: (value) {
+          if (!utils.isNumeric(value)) {
+            return 'Solo se aceptan numeros';
+          }
+          if (value.length < 8) {
+            return 'Ingrese un Numero Valido';
+          }
+          return null;
+        },
         onSaved: (value) => register.tel = value,
       ),
     );
@@ -145,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         validator: (value) =>
-            value.contains('@') ? null : 'Ingrese un email Valido',
+            utils.isEmail(value) ? null : 'Ingrese un email Valido',
         onSaved: (value) => register.email = value,
       ),
     );
@@ -155,6 +186,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       child: TextFormField(
         obscureText: true,
+        controller: passwordCtrl,
         decoration: InputDecoration(
           labelText: 'Contraseña',
           icon: Icon(
@@ -162,10 +194,27 @@ class _RegisterPageState extends State<RegisterPage> {
             color: Colors.purple[300],
           ),
         ),
-        validator: (value) => value.length < 7
+        validator: (value) => value.length < 6
             ? 'Ingrese una contraseña mayor a 6 caracteres'
             : null,
         onSaved: (value) => register.password = value,
+      ),
+    );
+  }
+
+  Widget _passwordValidateField() {
+    return Container(
+      child: TextFormField(
+        obscureText: true,
+        decoration: InputDecoration(
+          labelText: 'Confirma tu contraseña',
+          icon: Icon(
+            Icons.lock_outline,
+            color: Colors.purple[300],
+          ),
+        ),
+        validator: (value) =>
+            passwordCtrl.text != value ? 'Las contraseñas no coinciden' : null,
       ),
     );
   }
@@ -182,8 +231,15 @@ class _RegisterPageState extends State<RegisterPage> {
             color: Colors.purple[300],
           ),
         ),
-        validator: (value) =>
-            value.length != 5 ? 'Ingrese un C.P. valido' : null,
+        validator: (value) {
+          if (!utils.isNumeric(value)) {
+            return 'Solo se aceptan numeros';
+          }
+          if (value.length != 5) {
+            return 'Ingrese un C.P. Valido';
+          }
+          return null;
+        },
         onSaved: (value) => register.cp = value,
       ),
     );
@@ -198,24 +254,24 @@ class _RegisterPageState extends State<RegisterPage> {
           style: TextStyle(color: Colors.white, fontSize: 16.0),
         ),
       ),
-      onPressed: () {
-        _sendData();
-      },
+      onPressed: () => _load ? null : _sendData(),
     );
   }
 
   void _sendData() {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
-    //final DataSuccess success = new DataSuccess(
-    //    message: 'Registro exitoso', route1: 'home', route2: 'solicitante');
-    //Navigator.pushReplacementNamed(context, 'success', arguments: success);
+    setState(() {
+      _load = true;
+    });
     final resp = authProvider.register(register);
 
     resp.then((response) {
       if (response.status) {
         final DataSuccess success = new DataSuccess(
-            message: 'Registro exitoso', route1: 'home', route2: 'solicitante');
+            message: 'Registro exitoso',
+            route1: 'inicio',
+            route2: 'solicitante');
         Navigator.pushReplacementNamed(context, 'success', arguments: success);
       } else {
         utils.showAlert(context, 'Error', response.message);

@@ -5,6 +5,7 @@ import 'package:violencia_cero/src/providers/auth_provider.dart';
 import 'package:violencia_cero/src/share_prefs/user_preferences.dart';
 
 import 'package:violencia_cero/src/utils/utils.dart' as utils;
+import 'package:violencia_cero/src/utils/variables_utils.dart' as var_utils;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,22 +26,53 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final sizeScreen = MediaQuery.of(context).size;
     return Scaffold(
-      body: _loginForm(context),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Stack(
+        children: [
+          _fondoDecoration(sizeScreen),
+          _loginForm(context, sizeScreen),
+        ],
+      ),
+      bottomNavigationBar: var_utils.phoneBar,
     );
   }
 
-  Widget _loginForm(BuildContext context) {
+  Widget _fondoDecoration(Size sizeScreen) {
+    return Container(
+      height: sizeScreen.height - 50,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/fondo.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _loginForm(BuildContext context, Size sizeScreen) {
     return SingleChildScrollView(
       child: Form(
         key: formKey,
         child: Column(
           children: <Widget>[
-            SafeArea(
-              child: Container(
-                height: 100.0,
+            SizedBox(height: sizeScreen.height * 0.06),
+            Container(
+              child: Material(
+                elevation: 12.0,
+                shape: CircleBorder(),
+                child: Image(
+                  width: 125.0,
+                  image: AssetImage('assets/images/principal1.png'),
+                ),
               ),
             ),
+            SizedBox(height: 30.0),
             Text(
               'Login',
               style: TextStyle(fontSize: 30.0, color: Colors.purple[300]),
@@ -58,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 10.0),
             _registerButton(context),
             SizedBox(height: 10.0),
-            _forgontPasswordButton(),
+            _forgontPasswordButton(context),
           ],
         ),
       ),
@@ -77,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           labelText: 'Correo Electronico',
         ),
-        validator: (value) => value.contains('@') ? null : 'email invalido',
+        validator: (value) => utils.isEmail(value) ? null : 'email invalido',
         onSaved: (value) => _login.email = value,
       ),
     );
@@ -106,9 +138,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginButton(BuildContext context) {
     return RaisedButton(
       child: Container(
-        child: Text('Ingresar'),
+        child: Text(
+          'Ingresar',
+          style: TextStyle(fontSize: 20.0),
+        ),
       ),
-      color: Colors.purple[300],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 40.0),
+      color: Color.fromRGBO(244, 99, 212, 1.0),
       textColor: Colors.white,
       onPressed: () {
         if (!formKey.currentState.validate()) return;
@@ -142,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _forgontPasswordButton() {
+  Widget _forgontPasswordButton(BuildContext context) {
     return RaisedButton(
       child: Container(
         child: Text('Olvide mi contraseña'),
@@ -150,7 +189,9 @@ class _LoginPageState extends State<LoginPage> {
       color: Colors.white,
       textColor: Colors.purple[300],
       elevation: 0.0,
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, 'sendcode');
+      },
     );
   }
 }

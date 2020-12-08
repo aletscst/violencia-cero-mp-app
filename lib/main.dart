@@ -4,9 +4,21 @@ import 'package:violencia_cero/src/pages/attention_center_page.dart';
 import 'package:violencia_cero/src/pages/contacts_page.dart';
 import 'package:violencia_cero/src/pages/denuncia/denunciado_page.dart';
 import 'package:violencia_cero/src/pages/denuncia/solicitante_page.dart';
+import 'package:violencia_cero/src/pages/forgot_password/check_code_page.dart';
+import 'package:violencia_cero/src/pages/forgot_password/send_code_page.dart';
+import 'package:violencia_cero/src/pages/forgot_password/update_password.dart';
 import 'package:violencia_cero/src/pages/home_page.dart';
 import 'package:violencia_cero/src/pages/info_violence_page.dart';
 import 'package:violencia_cero/src/pages/login_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/conoce_derechos_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/directorio_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/info_violencia_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/inicio_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/menu_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/tipos_violencia_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/violentometro3_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/violentometro2_page.dart';
+import 'package:violencia_cero/src/pages/new_desing/violentometro_page.dart';
 import 'package:violencia_cero/src/pages/procedure_detail_page.dart';
 import 'package:violencia_cero/src/pages/procedures_page.dart';
 import 'package:violencia_cero/src/pages/register_page.dart';
@@ -28,22 +40,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
+      initialRoute: 'inicio',
       routes: <String, WidgetBuilder>{
-        'home': (BuildContext context) => HomePage(),
-        'contacts': (BuildContext context) => ContactsPage(),
-        'procedures': (BuildContext context) => ProceduresPage(),
+        'inicio': (BuildContext context) => InicioPage(),
+        'menu': (BuildContext context) => MenuPage(),
+        'violentometro': (BuildContext context) => ViolentometroPage(),
+        'violentometro2': (BuildContext context) => Violentometro2Page(),
+        'violentometro3': (BuildContext context) => Violentometro3Page(),
+        'tiposViolencia': (BuildContext context) => TiposViolenciaPage(),
+        'directorio': (BuildContext context) => DirectorioPage(),
+        'derechos': (BuildContext context) => ConoceDerechosPage(),
+        'infoviolencia': (BuildContext context) => InfoViolenciaPage(),
+        //'home': (BuildContext context) => HomePage(),
+        //'contacts': (BuildContext context) => ContactsPage(),
+        //'procedures': (BuildContext context) => ProceduresPage(),
         'login': (BuildContext context) => LoginPage(),
         'register': (BuildContext context) => RegisterPage(),
         'solicitante': (BuildContext context) => SolicitantePage(),
         'denunciado': (BuildContext context) => DenunciadoPage(),
         'report': (BuildContext context) => ReportPage(),
-        'infov': (BuildContext context) => InfoViolencePage(),
-        'attentionlist': (BuildContext context) => AttentionCenterListPage(),
+        //'infov': (BuildContext context) => InfoViolencePage(),
+        //'attentionlist': (BuildContext context) => AttentionCenterListPage(),
         'attention': (BuildContext context) => AttentionCenterPage(),
-        'proceduredetail': (BuildContext context) => ProcedureDetailPage(),
-        'violencedetail': (BuildContext context) => ViolenceDetailPage(),
+        //'proceduredetail': (BuildContext context) => ProcedureDetailPage(),
+        //'violencedetail': (BuildContext context) => ViolenceDetailPage(),
         'success': (BuildContext context) => SuccessPage(),
+        'sendcode': (BuildContext context) => SendCodePage(),
+        'checkcode': (BuildContext context) => CheckCodePage(),
+        'updatepassword': (BuildContext context) => UpdatePasswordPage()
       },
     );
   }

@@ -17,3 +17,17 @@ void showAlert(BuildContext context, String title, String message) {
         );
       });
 }
+
+bool isNumeric(String value) {
+  if (value.isEmpty) return false;
+
+  final n = num.tryParse(value);
+
+  return n == null ? false : true;
+}
+
+bool isEmail(String value) {
+  return RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(value);
+}
