@@ -33,10 +33,11 @@ final List<String> maritaStatus = [
 
 final List<String> relationship = [
   'Padre',
-  'Hermano',
-  'Abuelo',
-  'Tio',
-  'Primo',
+  'Madre',
+  'Hermano(a)',
+  'Abuelo(a)',
+  'Tio(a)',
+  'Primo(a)',
   'Otro',
 ];
 

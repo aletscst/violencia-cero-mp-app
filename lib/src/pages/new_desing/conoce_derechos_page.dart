@@ -48,7 +48,7 @@ class ConoceDerechosPage extends StatelessWidget {
           SizedBox(
             height: sizeScreen.height * 0.04,
           ),
-          _imgVcero(),
+          _imgVcero(sizeScreen),
           SizedBox(
             height: sizeScreen.height * 0.04,
           ),
@@ -69,13 +69,13 @@ class ConoceDerechosPage extends StatelessWidget {
     );
   }
 
-  Widget _imgVcero() {
+  Widget _imgVcero(Size sizeScreen) {
     return Container(
       child: Material(
         elevation: 12.0,
         shape: CircleBorder(),
         child: Image(
-          width: 125.0,
+          width: sizeScreen.width * 0.25,
           image: AssetImage('assets/images/principal1.png'),
         ),
       ),
@@ -86,6 +86,7 @@ class ConoceDerechosPage extends StatelessWidget {
     return Container(
       child: Text(
         'Conoce tus derechos',
+        textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 35.0,
             color: Color.fromRGBO(140, 99, 218, 1.0),
@@ -144,7 +145,7 @@ class ConoceDerechosPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(50.0),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
           FlatButton(
@@ -181,7 +182,7 @@ class ConoceDerechosPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(50.0),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -219,7 +220,7 @@ class ConoceDerechosPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(50.0),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
           FlatButton(
@@ -256,7 +257,7 @@ class ConoceDerechosPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(50.0),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -294,7 +295,7 @@ class ConoceDerechosPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(50.0),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
           FlatButton(

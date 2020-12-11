@@ -13,13 +13,11 @@ class Violentometro2Page extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            _fondo(context),
-            _elements(sizeScreen, context),
-          ],
-        ),
+      body: Stack(
+        children: [
+          _fondo(context),
+          _elements(sizeScreen, context),
+        ],
       ),
       bottomNavigationBar: var_utils.phoneBar,
     );
@@ -43,11 +41,13 @@ class Violentometro2Page extends StatelessWidget {
   }
 
   Widget _elements(Size sizeScreen, BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
-      child: Column(
-        children: _fillItems(context),
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
+        child: Column(
+          children: _fillItems(context),
+        ),
       ),
     );
   }
@@ -143,9 +143,19 @@ class Violentometro2Page extends StatelessWidget {
 
   Widget _headerNumText() {
     return Container(
-      child: ListTile(
-        title: Text(
-          '56 58 11 11',
+      child: RaisedButton.icon(
+        elevation: 10.0,
+        icon: Icon(
+          Icons.phone,
+          color: Colors.white,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        color: Color.fromRGBO(201, 34, 130, 1.0),
+        label: Text(
+          '55 56 58 11 11',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 25.0,
@@ -153,7 +163,7 @@ class Violentometro2Page extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        onTap: () => {launch('tel:56581111')},
+        onPressed: () => {launch('tel:5556581111')},
       ),
     );
   }

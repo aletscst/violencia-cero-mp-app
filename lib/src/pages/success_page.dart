@@ -17,46 +17,66 @@ class SuccessPage extends StatelessWidget {
               scale: 2.5,
             ),
             SizedBox(height: 20.0),
-            Text(
-              success.message,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                success.message,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(height: 50.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                RaisedButton(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
-                  color: Colors.purple[300],
-                  child: Text(
-                    'Ir al Inicio',
-                    style: TextStyle(color: Colors.white, fontSize: 19.0),
-                  ),
-                  onPressed: () {
-                    Navigator.popUntil(
-                        context, ModalRoute.withName(success.route1));
-                  },
-                ),
-                Visibility(
-                  visible: success.route2 != 'home',
-                  child: RaisedButton(
+            Visibility(
+              visible: success.route2 != 'home',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  RaisedButton(
                     padding:
                         EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
                     color: Colors.purple[300],
                     child: Text(
-                      'Continuar',
+                      'Ir al Inicio',
                       style: TextStyle(color: Colors.white, fontSize: 19.0),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          success.route2, ModalRoute.withName('inicio'));
+                      Navigator.popUntil(
+                          context, ModalRoute.withName(success.route1));
                     },
                   ),
+                  Container(
+                    child: RaisedButton(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 10.0),
+                      color: Colors.purple[300],
+                      child: Text(
+                        'Continuar',
+                        style: TextStyle(color: Colors.white, fontSize: 19.0),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            success.route2, ModalRoute.withName('inicio'));
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: success.route2 == 'home',
+              child: RaisedButton(
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
+                color: Colors.purple[300],
+                child: Text(
+                  'Ir al Inicio',
+                  style: TextStyle(color: Colors.white, fontSize: 19.0),
                 ),
-              ],
-            )
+                onPressed: () {
+                  Navigator.popUntil(
+                      context, ModalRoute.withName(success.route1));
+                },
+              ),
+            ),
           ],
         ),
       ),

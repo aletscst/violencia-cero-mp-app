@@ -7,14 +7,12 @@ class InicioPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final sizeScreen = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            _fondo(sizeScreen),
-            _fondoDecoration(sizeScreen),
-            _elements(sizeScreen, context),
-          ],
-        ),
+      body: Stack(
+        children: [
+          _fondo(sizeScreen),
+          _fondoDecoration(sizeScreen),
+          _elements(sizeScreen, context),
+        ],
       ),
       bottomNavigationBar: var_utils.phoneBar,
     );
@@ -47,57 +45,59 @@ class InicioPage extends StatelessWidget {
   }
 
   Widget _elements(Size sizeScreen, BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: sizeScreen.height * 0.06),
-      child: Column(
-        children: [
-          _logoVcero(),
-          SizedBox(
-            height: sizeScreen.height * 0.03,
-          ),
-          _imgVcero(),
-          SizedBox(
-            height: sizeScreen.height * 0.02,
-          ),
-          _welcomeText(),
-          SizedBox(
-            height: sizeScreen.height * 0.02,
-          ),
-          _entrarBtn(context),
-          SizedBox(
-            height: sizeScreen.height * 0.02,
-          ),
-          _alzaVoz(),
-          SizedBox(
-            height: sizeScreen.height * 0.04,
-          ),
-          _logGob(),
-          SizedBox(
-            height: sizeScreen.height * 0.04,
-          ),
-          _optionsMenu(context),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(top: sizeScreen.height * 0.06),
+        child: Column(
+          children: [
+            _logoVcero(sizeScreen),
+            SizedBox(
+              height: sizeScreen.height * 0.03,
+            ),
+            _imgVcero(sizeScreen),
+            SizedBox(
+              height: sizeScreen.height * 0.02,
+            ),
+            _welcomeText(),
+            SizedBox(
+              height: sizeScreen.height * 0.02,
+            ),
+            _entrarBtn(context),
+            SizedBox(
+              height: sizeScreen.height * 0.02,
+            ),
+            _alzaVoz(sizeScreen),
+            SizedBox(
+              height: sizeScreen.height * 0.04,
+            ),
+            _logGob(sizeScreen),
+            SizedBox(
+              height: sizeScreen.height * 0.04,
+            ),
+            _optionsMenu(context, sizeScreen),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _logoVcero() {
+  Widget _logoVcero(Size sizeScreen) {
     return Container(
       child: Image(
-        width: 150.0,
+        width: sizeScreen.width * 0.35,
         image: AssetImage('assets/images/vcero.png'),
       ),
     );
   }
 
-  Widget _imgVcero() {
+  Widget _imgVcero(Size sizeScreen) {
     return Container(
       child: Material(
         elevation: 12.0,
         shape: CircleBorder(),
         child: Image(
-          width: 125.0,
+          width: sizeScreen.width * 0.25,
           image: AssetImage('assets/images/principal1.png'),
         ),
       ),
@@ -120,7 +120,7 @@ class InicioPage extends StatelessWidget {
     return RaisedButton(
       child: Container(
         child: Text(
-          'ENTRAR',
+          'DENUNCIA',
           style: TextStyle(fontSize: 20.0),
         ),
       ),
@@ -131,82 +131,86 @@ class InicioPage extends StatelessWidget {
       color: Color.fromRGBO(244, 99, 212, 1.0),
       textColor: Colors.white,
       onPressed: () {
-        Navigator.pushNamed(context, 'menu');
+        Navigator.pushNamed(context, 'login');
       },
     );
   }
 
-  Widget _alzaVoz() {
+  Widget _alzaVoz(Size sizeScreen) {
     return Container(
       child: Image(
-        width: 130.0,
+        width: sizeScreen.width * 0.3,
         image: AssetImage('assets/images/alzaVoz.png'),
       ),
     );
   }
 
-  Widget _logGob() {
+  Widget _logGob(Size sizeScreen) {
     return Container(
       child: Image(
-        width: 150.0,
+        width: sizeScreen.width * 0.3,
         image: AssetImage('assets/images/GobiernoPueblos.png'),
       ),
     );
   }
 
-  Widget _optionsMenu(BuildContext context) {
+  Widget _optionsMenu(BuildContext context, Size sizeScreen) {
     return Container(
       padding: EdgeInsets.only(bottom: 10.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Column(
-            children: [
-              FlatButton(
+          Flexible(
+            child: Card(
+              elevation: 0.0,
+              color: Colors.transparent,
+              child: FlatButton(
                 padding: EdgeInsets.all(0.0),
                 child: Image(
-                  width: 90.0,
                   image: AssetImage('assets/icons/derechos.png'),
                 ),
                 onPressed: () => Navigator.pushNamed(context, 'derechos'),
               ),
-            ],
+            ),
           ),
-          Column(
-            children: [
-              FlatButton(
+          Flexible(
+            child: Card(
+              elevation: 0.0,
+              color: Colors.transparent,
+              child: FlatButton(
                 padding: EdgeInsets.all(0.0),
                 child: Image(
-                  width: 90.0,
                   image: AssetImage('assets/icons/tiposV.png'),
                 ),
                 onPressed: () => Navigator.pushNamed(context, 'tiposViolencia'),
               ),
-            ],
+            ),
           ),
-          Column(
-            children: [
-              FlatButton(
+          Flexible(
+            child: Card(
+              elevation: 0.0,
+              color: Colors.transparent,
+              child: FlatButton(
                 padding: EdgeInsets.all(0.0),
                 child: Image(
-                  width: 90.0,
                   image: AssetImage('assets/icons/violenciometro.png'),
                 ),
                 onPressed: () => Navigator.pushNamed(context, 'violentometro'),
               ),
-            ],
+            ),
           ),
-          Column(
-            children: [
-              FlatButton(
+          Flexible(
+            child: Card(
+              elevation: 0.0,
+              color: Colors.transparent,
+              child: FlatButton(
                 padding: EdgeInsets.all(0.0),
                 child: Image(
-                  width: 90.0,
                   image: AssetImage('assets/icons/directorio.png'),
                 ),
                 onPressed: () => Navigator.pushNamed(context, 'directorio'),
               ),
-            ],
+            ),
           ),
         ],
       ),

@@ -228,7 +228,7 @@ class _SolicitantePageState extends State<SolicitantePage> {
         initialValue: solicitante.telefono,
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
-          labelText: 'Telefono',
+          labelText: 'Teléfono',
           icon: Icon(
             Icons.phone,
             color: Colors.purple[300],
@@ -281,7 +281,7 @@ class _SolicitantePageState extends State<SolicitantePage> {
         initialValue: solicitante.domicilio,
         maxLines: 2,
         decoration: InputDecoration(
-          labelText: 'Domicilio Actial',
+          labelText: 'Domicilio Actual',
           icon: Icon(
             Icons.house,
             color: Colors.purple[300],

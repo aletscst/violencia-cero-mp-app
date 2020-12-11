@@ -60,8 +60,8 @@ class TiposViolenciaPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _rowLeft(context),
-              _rowRight(context),
+              _rowLeft(context, sizeScreen),
+              _rowRight(context, sizeScreen),
             ],
           ),
         ),
@@ -69,14 +69,14 @@ class TiposViolenciaPage extends StatelessWidget {
     );
   }
 
-  Widget _rowLeft(BuildContext context) {
+  Widget _rowLeft(BuildContext context, Size sizeScreen) {
     return Container(
       child: Column(
         children: [
           FlatButton(
             padding: EdgeInsets.all(0.0),
             child: Image(
-              width: 150.0,
+              width: sizeScreen.width * 0.4,
               image: AssetImage('assets/images/pensiona.png'),
             ),
             onPressed: () {
@@ -92,7 +92,7 @@ class TiposViolenciaPage extends StatelessWidget {
           FlatButton(
             padding: EdgeInsets.all(0.0),
             child: Image(
-              width: 150.0,
+              width: sizeScreen.width * 0.4,
               image: AssetImage('assets/images/violenciaFam.png'),
             ),
             onPressed: () {
@@ -108,7 +108,7 @@ class TiposViolenciaPage extends StatelessWidget {
           FlatButton(
             padding: EdgeInsets.all(0.0),
             child: Image(
-              width: 150.0,
+              width: sizeScreen.width * 0.4,
               image: AssetImage('assets/images/maltratoInfantil.png'),
             ),
             onPressed: () {
@@ -125,14 +125,14 @@ class TiposViolenciaPage extends StatelessWidget {
     );
   }
 
-  Widget _rowRight(BuildContext context) {
+  Widget _rowRight(BuildContext context, Size sizeScreen) {
     return Container(
       child: Column(
         children: [
           FlatButton(
             padding: EdgeInsets.all(0.0),
             child: Image(
-              width: 90.0,
+              width: sizeScreen.width * 0.3,
               image: AssetImage('assets/images/principal2.png'),
             ),
             onPressed: () => null,
@@ -140,7 +140,7 @@ class TiposViolenciaPage extends StatelessWidget {
           FlatButton(
             padding: EdgeInsets.all(0.0),
             child: Image(
-              width: 150.0,
+              width: sizeScreen.width * 0.4,
               image: AssetImage('assets/images/maltratoMayores.png'),
             ),
             onPressed: () {
@@ -155,7 +155,7 @@ class TiposViolenciaPage extends StatelessWidget {
           FlatButton(
             padding: EdgeInsets.all(0.0),
             child: Image(
-              width: 150.0,
+              width: sizeScreen.width * 0.4,
               image: AssetImage('assets/images/violenciaDig.png'),
             ),
             onPressed: () {

@@ -94,7 +94,7 @@ class _CheckCodePageState extends State<CheckCodePage> {
       padding: EdgeInsets.symmetric(horizontal: 40.0),
       child: TextFormField(
         decoration: InputDecoration(
-          labelText: 'Ingresa el codigo que recibiste en tu correo',
+          labelText: 'Ingresa el codigo',
           icon: Icon(
             Icons.account_circle,
             color: Colors.purple[300],

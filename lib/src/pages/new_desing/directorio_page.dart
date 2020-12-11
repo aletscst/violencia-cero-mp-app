@@ -56,7 +56,7 @@ class _DirectorioPageState extends State<DirectorioPage> {
           SizedBox(
             height: sizeScreen.height * 0.04,
           ),
-          _imgVcero(),
+          _imgVcero(sizeScreen),
           SizedBox(
             height: sizeScreen.height * 0.02,
           ),
@@ -66,13 +66,13 @@ class _DirectorioPageState extends State<DirectorioPage> {
     );
   }
 
-  Widget _imgVcero() {
+  Widget _imgVcero(Size sizeScreen) {
     return Container(
       child: Material(
         elevation: 12.0,
         shape: CircleBorder(),
         child: Image(
-          width: 125.0,
+          width: sizeScreen.width * 0.25,
           image: AssetImage('assets/images/principal1.png'),
         ),
       ),

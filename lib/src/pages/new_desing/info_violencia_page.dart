@@ -40,25 +40,27 @@ class InfoViolenciaPage extends StatelessWidget {
   }
 
   Widget _elements(Size sizeScreen, BuildContext context, InfoViolencia data) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
-      child: Column(
-        children: [
-          _title(data.title),
-          SizedBox(
-            height: sizeScreen.height * 0.1,
-          ),
-          _imgVcero(),
-          SizedBox(
-            height: sizeScreen.height * 0.05,
-          ),
-          _description(data.description),
-          SizedBox(
-            height: sizeScreen.height * 0.06,
-          ),
-          _buttonLink(context, data.url),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
+        child: Column(
+          children: [
+            _title(data.title),
+            SizedBox(
+              height: sizeScreen.height * 0.1,
+            ),
+            _imgVcero(),
+            SizedBox(
+              height: sizeScreen.height * 0.05,
+            ),
+            _description(data.description),
+            SizedBox(
+              height: sizeScreen.height * 0.06,
+            ),
+            _buttonLink(context, data.url),
+          ],
+        ),
       ),
     );
   }
@@ -67,6 +69,7 @@ class InfoViolenciaPage extends StatelessWidget {
     return Container(
       child: Text(
         title,
+        textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.white,
           fontSize: 30.0,

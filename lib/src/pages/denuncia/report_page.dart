@@ -167,7 +167,7 @@ class _ReportPageState extends State<ReportPage> {
     resp.then((response) {
       if (response.status) {
         final DataSuccess success = new DataSuccess(
-            message: 'Denuncia Envida, Nos comunicaremos contigo pronto',
+            message: 'Denuncia Envida\n Nos comunicaremos contigo pronto',
             route1: 'inicio',
             route2: 'home');
         Navigator.pushReplacementNamed(context, 'success', arguments: success);

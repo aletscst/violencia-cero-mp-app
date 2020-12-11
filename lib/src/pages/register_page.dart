@@ -143,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
         initialValue: register.tel,
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
-          labelText: 'Telefono',
+          labelText: 'Teléfono',
           icon: Icon(
             Icons.phone,
             color: Colors.purple[300],

@@ -63,7 +63,7 @@ class MenuPage extends StatelessWidget {
       padding: EdgeInsets.only(top: sizeScreen.height * 0.06),
       child: Column(
         children: [
-          _logo(),
+          _logo(sizeScreen),
           SizedBox(
             height: sizeScreen.height * 0.03,
           ),
@@ -73,10 +73,10 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  Widget _logo() {
+  Widget _logo(Size sizeScreen) {
     return Container(
       child: Image(
-        width: 150.0,
+        width: sizeScreen.width * 0.3,
         image: AssetImage('assets/images/logo_blanco.png'),
       ),
     );

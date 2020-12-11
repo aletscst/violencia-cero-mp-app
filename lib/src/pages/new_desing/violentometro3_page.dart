@@ -42,11 +42,13 @@ class Violentometro3Page extends StatelessWidget {
   }
 
   Widget _elements(Size sizeScreen, BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
-      child: Column(
-        children: _fillItems(context),
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
+        child: Column(
+          children: _fillItems(context),
+        ),
       ),
     );
   }
@@ -132,9 +134,19 @@ class Violentometro3Page extends StatelessWidget {
 
   Widget _headerNumText() {
     return Container(
-      child: ListTile(
-        title: Text(
-          '56 58 11 11',
+      child: RaisedButton.icon(
+        elevation: 10.0,
+        icon: Icon(
+          Icons.phone,
+          color: Colors.white,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        color: Color.fromRGBO(27, 20, 100, 1.0),
+        label: Text(
+          '55 56 58 11 11',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 25.0,
@@ -142,7 +154,7 @@ class Violentometro3Page extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        onTap: () => {launch('tel:56581111')},
+        onPressed: () => {launch('tel:5556581111')},
       ),
     );
   }
@@ -154,7 +166,7 @@ class Violentometro3Page extends StatelessWidget {
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.white,
-          fontSize: 40.0,
+          fontSize: 35.0,
           fontWeight: FontWeight.bold,
         ),
       ),
