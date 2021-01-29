@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:violencia_cero/src/pages/attention_center_list_page.dart';
 import 'package:violencia_cero/src/pages/attention_center_page.dart';
-import 'package:violencia_cero/src/pages/contacts_page.dart';
 import 'package:violencia_cero/src/pages/denuncia/denunciado_page.dart';
 import 'package:violencia_cero/src/pages/denuncia/solicitante_page.dart';
 import 'package:violencia_cero/src/pages/forgot_password/check_code_page.dart';
 import 'package:violencia_cero/src/pages/forgot_password/send_code_page.dart';
 import 'package:violencia_cero/src/pages/forgot_password/update_password.dart';
-import 'package:violencia_cero/src/pages/home_page.dart';
-import 'package:violencia_cero/src/pages/info_violence_page.dart';
 import 'package:violencia_cero/src/pages/login_page.dart';
 import 'package:violencia_cero/src/pages/new_desing/conoce_derechos_page.dart';
 import 'package:violencia_cero/src/pages/new_desing/directorio_page.dart';
@@ -19,12 +15,9 @@ import 'package:violencia_cero/src/pages/new_desing/tipos_violencia_page.dart';
 import 'package:violencia_cero/src/pages/new_desing/violentometro3_page.dart';
 import 'package:violencia_cero/src/pages/new_desing/violentometro2_page.dart';
 import 'package:violencia_cero/src/pages/new_desing/violentometro_page.dart';
-import 'package:violencia_cero/src/pages/procedure_detail_page.dart';
-import 'package:violencia_cero/src/pages/procedures_page.dart';
 import 'package:violencia_cero/src/pages/register_page.dart';
 import 'package:violencia_cero/src/pages/denuncia/report_page.dart';
 import 'package:violencia_cero/src/pages/success_page.dart';
-import 'package:violencia_cero/src/pages/violence_detail_page.dart';
 import 'package:violencia_cero/src/share_prefs/user_preferences.dart';
 
 void main() async {

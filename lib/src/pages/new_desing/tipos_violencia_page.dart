@@ -13,13 +13,13 @@ class TiposViolenciaPage extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            _fondo(sizeScreen),
-            _elements(sizeScreen, context),
-          ],
-        ),
+      body: Stack(
+        children: [
+          _fondo(sizeScreen),
+          SingleChildScrollView(
+            child: _elements(sizeScreen, context),
+          )
+        ],
       ),
       bottomNavigationBar: var_utils.phoneBar,
     );
@@ -77,15 +77,13 @@ class TiposViolenciaPage extends StatelessWidget {
             padding: EdgeInsets.all(0.0),
             child: Image(
               width: sizeScreen.width * 0.4,
-              image: AssetImage('assets/images/pensiona.png'),
+              image: AssetImage('assets/images/violencia-digital.png'),
             ),
             onPressed: () {
-              final InfoViolencia info = new InfoViolencia(
-                  title: 'Pensión alimenticia',
-                  description:
-                      'Puede definirse como el deber impuesto a una o varias personas de asegurar la subsistencia de una u otra, comprenden todo lo indispensable para el sustento, habitación, vestido, asistencia médica y educación.',
-                  url:
-                      'https://www.poderjudicialcdmx.gob.mx/recepcion-de-demandas-iniciales-en-materia-familiar/');
+              final info = {
+                'id': 1,
+                'title': 'Violencia Digital',
+              };
               Navigator.pushNamed(context, 'infoviolencia', arguments: info);
             },
           ),
@@ -93,15 +91,13 @@ class TiposViolenciaPage extends StatelessWidget {
             padding: EdgeInsets.all(0.0),
             child: Image(
               width: sizeScreen.width * 0.4,
-              image: AssetImage('assets/images/violenciaFam.png'),
+              image: AssetImage('assets/images/violencia-patrimonial.png'),
             ),
             onPressed: () {
-              final InfoViolencia info = new InfoViolencia(
-                  title: 'Violencia Familiar',
-                  description:
-                      'Ocurre dentro y fuera del domicilio de la víctima por parte de la persona agresora con la que tenga o haya tenido parentesco por consanguinidad y afinidad, derivada del concubinato, matrimonio, o sociedad en convivencia, es decir: la pareja varón y los parientes de la esposa y entre la mujer y los parientes del esposo.',
-                  url:
-                      'https://www.poderjudicialcdmx.gob.mx/recepcion-de-demandas-iniciales-en-materia-familiar/');
+              final info = {
+                'id': 3,
+                'title': 'Violencia Patrimonial',
+              };
               Navigator.pushNamed(context, 'infoviolencia', arguments: info);
             },
           ),
@@ -109,14 +105,41 @@ class TiposViolenciaPage extends StatelessWidget {
             padding: EdgeInsets.all(0.0),
             child: Image(
               width: sizeScreen.width * 0.4,
-              image: AssetImage('assets/images/maltratoInfantil.png'),
+              image: AssetImage('assets/images/violencia-sexual.png'),
             ),
             onPressed: () {
-              final InfoViolencia info = new InfoViolencia(
-                  title: 'Maltrato infantil',
-                  description:
-                      'Se define como los abusos y la desatención de que son objeto los menores de 18 años, e incluye todos los tipos de maltrato físico o psicológico, abuso sexual, desatención, negligencia y explotación comercial o de otro tipo que causen o puedan causar un daño a la salud, desarrollo o dignidad del niño, o poner en peligro su supervivencia.',
-                  url: 'https://www.fgjcdmx.gob.mx/');
+              final info = {
+                'id': 5,
+                'title': 'Violencia Sexual',
+              };
+              Navigator.pushNamed(context, 'infoviolencia', arguments: info);
+            },
+          ),
+          FlatButton(
+            padding: EdgeInsets.all(0.0),
+            child: Image(
+              width: sizeScreen.width * 0.4,
+              image: AssetImage('assets/images/violencia-feminicida.png'),
+            ),
+            onPressed: () {
+              final info = {
+                'id': 7,
+                'title': 'Violencia Feminicida',
+              };
+              Navigator.pushNamed(context, 'infoviolencia', arguments: info);
+            },
+          ),
+          FlatButton(
+            padding: EdgeInsets.all(0.0),
+            child: Image(
+              width: sizeScreen.width * 0.4,
+              image: AssetImage('assets/images/violencia-emocional.png'),
+            ),
+            onPressed: () {
+              final info = {
+                'id': 9,
+                'title': 'Violencia Psicoemocional',
+              };
               Navigator.pushNamed(context, 'infoviolencia', arguments: info);
             },
           )
@@ -141,14 +164,13 @@ class TiposViolenciaPage extends StatelessWidget {
             padding: EdgeInsets.all(0.0),
             child: Image(
               width: sizeScreen.width * 0.4,
-              image: AssetImage('assets/images/maltratoMayores.png'),
+              image: AssetImage('assets/images/violencia-fisica.png'),
             ),
             onPressed: () {
-              final InfoViolencia info = new InfoViolencia(
-                  title: 'Maltrato a adultos mayores',
-                  description:
-                      'Es un acto único o repetido que causa daño o sufrimiento a una persona de edad, o la falta de medidas apropiadas para evitarlo, que se produce en una relación basada en la confianza.',
-                  url: 'https://www.fgjcdmx.gob.mx/');
+              final info = {
+                'id': 2,
+                'title': 'Violencia Física',
+              };
               Navigator.pushNamed(context, 'infoviolencia', arguments: info);
             },
           ),
@@ -156,14 +178,55 @@ class TiposViolenciaPage extends StatelessWidget {
             padding: EdgeInsets.all(0.0),
             child: Image(
               width: sizeScreen.width * 0.4,
-              image: AssetImage('assets/images/violenciaDig.png'),
+              image: AssetImage('assets/images/violencia-economica.png'),
             ),
             onPressed: () {
-              final InfoViolencia info = new InfoViolencia(
-                  title: 'Violencia digital',
-                  description:
-                      'El acoso cibernético (o ciberacoso) consiste en utilizar la tecnología para amenazar, avergonzar, intimidar o criticar a otra persona. En otras palabras, es todo aquello que se publica en Internet con la intención de hacer daño, avergonzar o molestar a otra persona.',
-                  url: 'http://data.ssp.cdmx.gob.mx/ciberdelincuencia.html');
+              final info = {
+                'id': 4,
+                'title': 'Violencia Económica',
+              };
+              Navigator.pushNamed(context, 'infoviolencia', arguments: info);
+            },
+          ),
+          FlatButton(
+            padding: EdgeInsets.all(0.0),
+            child: Image(
+              width: sizeScreen.width * 0.4,
+              image: AssetImage('assets/images/violencia-reproductivo.png'),
+            ),
+            onPressed: () {
+              final info = {
+                'id': 6,
+                'title': 'Violencia contra los Derechos Reproductivos',
+              };
+              Navigator.pushNamed(context, 'infoviolencia', arguments: info);
+            },
+          ),
+          FlatButton(
+            padding: EdgeInsets.all(0.0),
+            child: Image(
+              width: sizeScreen.width * 0.4,
+              image: AssetImage('assets/images/violencia-simbolica.png'),
+            ),
+            onPressed: () {
+              final info = {
+                'id': 8,
+                'title': 'Violencia Simbólica',
+              };
+              Navigator.pushNamed(context, 'infoviolencia', arguments: info);
+            },
+          ),
+          FlatButton(
+            padding: EdgeInsets.all(0.0),
+            child: Image(
+              width: sizeScreen.width * 0.4,
+              image: AssetImage('assets/images/violencia-parto.png'),
+            ),
+            onPressed: () {
+              final info = {
+                'id': 10,
+                'title': 'Violencia en la gestación, parto o lactancia',
+              };
               Navigator.pushNamed(context, 'infoviolencia', arguments: info);
             },
           )

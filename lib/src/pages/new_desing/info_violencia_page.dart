@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:violencia_cero/src/models/info_violencia_model.dart';
+import 'package:violencia_cero/src/providers/violence_provider.dart';
 
 import 'package:violencia_cero/src/utils/variables_utils.dart' as var_utils;
 
 class InfoViolenciaPage extends StatelessWidget {
+  final ViolenceProvider _violenceProvider = new ViolenceProvider();
+
   @override
   Widget build(BuildContext context) {
     final sizeScreen = MediaQuery.of(context).size;
-    final InfoViolencia data = ModalRoute.of(context).settings.arguments;
+    final data = ModalRoute.of(context).settings.arguments;
+    print(data);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -39,27 +43,58 @@ class InfoViolenciaPage extends StatelessWidget {
     );
   }
 
-  Widget _elements(Size sizeScreen, BuildContext context, InfoViolencia data) {
+  Widget _elements(Size sizeScreen, BuildContext context, data) {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
-        child: Column(
-          children: [
-            _title(data.title),
-            SizedBox(
-              height: sizeScreen.height * 0.1,
-            ),
-            _imgVcero(),
-            SizedBox(
-              height: sizeScreen.height * 0.05,
-            ),
-            _description(data.description),
-            SizedBox(
-              height: sizeScreen.height * 0.06,
-            ),
-            _buttonLink(context, data.url),
-          ],
+        child: FutureBuilder(
+          future:
+              _violenceProvider.getViolenceInfoDetail(data["id"].toString()),
+          builder:
+              (BuildContext context, AsyncSnapshot<InfoViolencia> snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: sizeScreen.height * 0.02,
+                  ),
+                  _title(snapshot.data.title),
+                  SizedBox(
+                    height: sizeScreen.height * 0.1,
+                  ),
+                  _imgVcero(sizeScreen),
+                  SizedBox(
+                    height: sizeScreen.height * 0.05,
+                  ),
+                  _description(snapshot.data.description),
+                  SizedBox(
+                    height: sizeScreen.height * 0.06,
+                  ),
+                  _buttonLink(context, snapshot.data.url),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: sizeScreen.height * 0.02,
+                  ),
+                  _title(data["title"]),
+                  SizedBox(
+                    height: sizeScreen.height * 0.1,
+                  ),
+                  _imgVcero(sizeScreen),
+                  SizedBox(
+                    height: sizeScreen.height * 0.05,
+                  ),
+                  Center(
+                    child: CircularProgressIndicator(),
+                  )
+                ],
+              );
+            }
+          },
         ),
       ),
     );
@@ -67,6 +102,7 @@ class InfoViolenciaPage extends StatelessWidget {
 
   Widget _title(String title) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
         title,
         textAlign: TextAlign.center,
@@ -79,13 +115,13 @@ class InfoViolenciaPage extends StatelessWidget {
     );
   }
 
-  Widget _imgVcero() {
+  Widget _imgVcero(Size sizeScreen) {
     return Container(
       child: Material(
         elevation: 12.0,
         shape: CircleBorder(),
         child: Image(
-          width: 125.0,
+          width: sizeScreen.width * 0.30,
           image: AssetImage('assets/images/principal1.png'),
         ),
       ),
@@ -112,7 +148,7 @@ class InfoViolenciaPage extends StatelessWidget {
     return RaisedButton(
       child: Container(
         child: Text(
-          'Mas información',
+          'Denuncia Digital',
           style: TextStyle(fontSize: 20.0),
         ),
       ),

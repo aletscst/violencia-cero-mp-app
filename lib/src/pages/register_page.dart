@@ -1,5 +1,8 @@
+import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:violencia_cero/src/models/register_model.dart';
 import 'package:violencia_cero/src/models/success_model.dart';
 import 'package:violencia_cero/src/providers/auth_provider.dart';
@@ -17,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final authProvider = new AuthProvider();
 
   bool _load = false;
+  bool _acceptConditios = false;
 
   TextEditingController passwordCtrl = new TextEditingController();
 
@@ -73,6 +77,8 @@ class _RegisterPageState extends State<RegisterPage> {
             _passwordValidateField(),
             SizedBox(height: 10.0),
             _cpField(),
+            SizedBox(height: 20.0),
+            _termsConditions(),
             SizedBox(height: 20.0),
             _registerButton(),
             SizedBox(height: 10.0),
@@ -241,6 +247,47 @@ class _RegisterPageState extends State<RegisterPage> {
           return null;
         },
         onSaved: (value) => register.cp = value,
+      ),
+    );
+  }
+
+  Widget _termsConditions() {
+    TextStyle defaultStyle = TextStyle(color: Colors.black54, fontSize: 16.0);
+    TextStyle linkStyle = TextStyle(color: Colors.blue);
+    return Container(
+      child: CheckboxListTileFormField(
+        initialValue: _acceptConditios,
+        title: RichText(
+          textAlign: TextAlign.justify,
+          text: TextSpan(
+            style: defaultStyle,
+            children: <TextSpan>[
+              TextSpan(text: 'He leído y Acepto los '),
+              TextSpan(
+                text: 'Terminos y Condiciones',
+                style: linkStyle,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => launch(
+                      'http://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf?utm_pais=mexico'),
+              ),
+              TextSpan(text: ', así como el '),
+              TextSpan(
+                text: 'Aviso de Privacidad',
+                style: linkStyle,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => launch(
+                      'http://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf?utm_pais=mexico'),
+              ),
+              TextSpan(text: ' sobre el uso de esta aplicación.'),
+            ],
+          ),
+        ),
+        onSaved: (value) {
+          setState(() {
+            _acceptConditios = value;
+          });
+        },
+        validator: (value) => value ? null : 'aceptar aviso de privacidad',
       ),
     );
   }

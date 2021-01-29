@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final String generalPath = 'http://201.116.12.210:3000';
+//final String generalPath = 'http://192.168.0.18:3000';
 
 final List<int> ages = _getAges();
 

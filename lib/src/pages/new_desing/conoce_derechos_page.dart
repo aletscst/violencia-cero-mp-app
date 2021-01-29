@@ -99,7 +99,13 @@ class ConoceDerechosPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
-        'La Alcaldía de Milpa Alta tiene la responsabilidad de garantizar los derechos de las mujeres y las niñas y son derechos humanos.',
+        'El Gobierno de los Pueblos de la alcaldía Milpa Alta tiene la' +
+            ' responsabilidad de hacer valer y respetar los derechos de las mujeres' +
+            ', con la finalidad de erradicar por completo todos los tipos de ' +
+            'violencia hacia ellas.\n \n' +
+            'Es por ello que te presentamos una serie de Leyes e instrumentos en ' +
+            'donde podrás encontrar la información que salvaguarda tus derechos ' +
+            'como mujer. ¡Conócelos y utilízalos!',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 15.0,
@@ -123,14 +129,14 @@ class ConoceDerechosPage extends StatelessWidget {
             height: sizeScreen.height * 0.02,
           ),
           _derecho3(sizeScreen),
-          SizedBox(
-            height: sizeScreen.height * 0.02,
-          ),
-          _derecho4(sizeScreen),
-          SizedBox(
-            height: sizeScreen.height * 0.02,
-          ),
-          _derecho5(sizeScreen),
+          //SizedBox(
+          //  height: sizeScreen.height * 0.02,
+          //),
+          //_derecho4(sizeScreen),
+          //SizedBox(
+          //  height: sizeScreen.height * 0.02,
+          //),
+          //_derecho5(sizeScreen),
           SizedBox(
             height: sizeScreen.height * 0.02,
           ),
@@ -148,7 +154,8 @@ class ConoceDerechosPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
-          FlatButton(
+          RaisedButton(
+            elevation: 8.0,
             color: var_utils.colors[2],
             shape: StadiumBorder(),
             child: Container(
@@ -159,14 +166,14 @@ class ConoceDerechosPage extends StatelessWidget {
             ),
             onPressed: () {
               _launchURL(
-                  'http://historico.juridicas.unam.mx/publica/librev/rev/derhum/cont/25/pr/pr22.pdf');
+                  'https://www.milpa-alta.cdmx.gob.mx/App/LeyOlimpia.pdf');
             },
           ),
           Container(
             width: sizeScreen.width * 0.6,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'Convención sobre los Derechos Políticos de la Mujer (1952)',
+              'Ley Olimpia',
               style: TextStyle(
                   color: var_utils.colors[1], fontWeight: FontWeight.bold),
             ),
@@ -190,12 +197,13 @@ class ConoceDerechosPage extends StatelessWidget {
             width: sizeScreen.width * 0.6,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'Discriminación contra la Mujer CEDAW(1967)',
+              'Ley de Acceso de las Mujeres a una Vida Libre de Violencia',
               style: TextStyle(
                   color: var_utils.colors[1], fontWeight: FontWeight.bold),
             ),
           ),
-          FlatButton(
+          RaisedButton(
+            elevation: 8.0,
             color: var_utils.colors[0],
             shape: StadiumBorder(),
             child: Container(
@@ -206,7 +214,7 @@ class ConoceDerechosPage extends StatelessWidget {
             ),
             onPressed: () {
               _launchURL(
-                  'https://www.ohchr.org/sp/professionalinterest/pages/cedaw.aspx');
+                  'https://www.milpa-alta.cdmx.gob.mx/App/LeyDeAccesoDeLasMujeresAUnaVidaLibreDeViolencia.pdf');
             },
           ),
         ],
@@ -223,7 +231,8 @@ class ConoceDerechosPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
-          FlatButton(
+          RaisedButton(
+            elevation: 8.0,
             color: var_utils.colors[1],
             shape: StadiumBorder(),
             child: Container(
@@ -234,14 +243,14 @@ class ConoceDerechosPage extends StatelessWidget {
             ),
             onPressed: () {
               _launchURL(
-                  'https://www.unwomen.org/es/how-we-work/intergovernmental-support/world-conferences-on-women');
+                  'https://www.milpa-alta.cdmx.gob.mx/App/LeyesEInstrumentos-IgualdaDeGenero.pdf');
             },
           ),
           Container(
             width: sizeScreen.width * 0.6,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'Conferencias mundiales sobre la mujer',
+              'Leyes e Instrumento Internacionales Sobre Igualdad y Perspectiva de Género',
               style: TextStyle(
                   color: var_utils.colors[1], fontWeight: FontWeight.bold),
             ),
@@ -251,80 +260,82 @@ class ConoceDerechosPage extends StatelessWidget {
     );
   }
 
-  Widget _derecho4(Size sizeScreen) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(50.0),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            width: sizeScreen.width * 0.6,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Text(
-              'Declaración de las Naciones Unidas para la Eliminación de la Violencia contra la Mujer (1993)',
-              style: TextStyle(
-                  color: var_utils.colors[1], fontWeight: FontWeight.bold),
-            ),
-          ),
-          FlatButton(
-            color: var_utils.colors[3],
-            shape: StadiumBorder(),
-            child: Container(
-              child: Icon(
-                Icons.link,
-                color: Colors.white,
-              ),
-            ),
-            onPressed: () {
-              _launchURL(
-                  'https://www.ohchr.org/SP/ProfessionalInterest/Pages/ViolenceAgainstWomen.aspx');
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _derecho5(Size sizeScreen) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(50.0),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        children: [
-          FlatButton(
-            color: var_utils.colors[0],
-            shape: StadiumBorder(),
-            child: Container(
-              child: Icon(
-                Icons.link,
-                color: Colors.white,
-              ),
-            ),
-            onPressed: () {
-              _launchURL(
-                  'https://www.cndh.org.mx/sites/all/doc/programas/mujer/Material_difusion/convencion_BelemdoPara.pdf');
-            },
-          ),
-          Container(
-            width: sizeScreen.width * 0.6,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Text(
-              'Convención Interamericana para Prevenir, Atender, Sancionar y Erradicar la Violencia contra la Mujer Belem do Pará (1994)',
-              style: TextStyle(
-                  color: var_utils.colors[1], fontWeight: FontWeight.bold),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  //Widget _derecho4(Size sizeScreen) {
+  //  return Container(
+  //    decoration: BoxDecoration(
+  //      color: Colors.white,
+  //      borderRadius: BorderRadius.circular(50.0),
+  //    ),
+  //    padding: EdgeInsets.symmetric(horizontal: 10.0),
+  //    child: Row(
+  //      mainAxisAlignment: MainAxisAlignment.end,
+  //      children: [
+  //        Container(
+  //          width: sizeScreen.width * 0.6,
+  //          padding: EdgeInsets.symmetric(horizontal: 10.0),
+  //          child: Text(
+  //            'Declaración de las Naciones Unidas para la Eliminación de la Violencia contra la Mujer (1993)',
+  //            style: TextStyle(
+  //                color: var_utils.colors[1], fontWeight: FontWeight.bold),
+  //          ),
+  //        ),
+  //        RaisedButton(
+  //          elevation: 8.0,
+  //          color: var_utils.colors[3],
+  //          shape: StadiumBorder(),
+  //          child: Container(
+  //            child: Icon(
+  //              Icons.link,
+  //              color: Colors.white,
+  //            ),
+  //          ),
+  //          onPressed: () {
+  //            _launchURL(
+  //                'https://www.ohchr.org/SP/ProfessionalInterest/Pages/ViolenceAgainstWomen.aspx');
+  //          },
+  //        ),
+  //      ],
+  //    ),
+  //  );
+  //}
+//
+  //Widget _derecho5(Size sizeScreen) {
+  //  return Container(
+  //    decoration: BoxDecoration(
+  //      color: Colors.white,
+  //      borderRadius: BorderRadius.circular(50.0),
+  //    ),
+  //    padding: EdgeInsets.symmetric(horizontal: 10.0),
+  //    child: Row(
+  //      children: [
+  //        RaisedButton(
+  //          elevation: 5.0,
+  //          color: var_utils.colors[0],
+  //          shape: StadiumBorder(),
+  //          child: Container(
+  //            child: Icon(
+  //              Icons.link,
+  //              color: Colors.white,
+  //            ),
+  //          ),
+  //          onPressed: () {
+  //            _launchURL(
+  //                'https://www.cndh.org.mx/sites/all/doc/programas/mujer/Material_difusion/convencion_BelemdoPara.pdf');
+  //          },
+  //        ),
+  //        Container(
+  //          width: sizeScreen.width * 0.6,
+  //          padding: EdgeInsets.symmetric(horizontal: 10.0),
+  //          child: Text(
+  //            'Convención Interamericana para Prevenir, Atender, Sancionar y Erradicar la Violencia contra la Mujer Belem do Pará (1994)',
+  //            style: TextStyle(
+  //                color: var_utils.colors[1], fontWeight: FontWeight.bold),
+  //          ),
+  //        )
+  //      ],
+  //    ),
+  //  );
+  //}
 
   void _launchURL(String url) async {
     if (await canLaunch(url)) {

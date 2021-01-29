@@ -1,19 +1,19 @@
 class Parrafo {
   Parrafo({
-    this.subtitulo,
+    this.link,
     this.texto,
   });
 
-  String subtitulo;
+  String link;
   String texto;
 
   factory Parrafo.fromJson(Map<String, dynamic> json) => Parrafo(
-        subtitulo: json["subtitulo"],
+        link: json["link"],
         texto: json["texto"],
       );
 
   Map<String, dynamic> toJson() => {
-        "subtitulo": subtitulo,
+        "link": link,
         "texto": texto,
       };
 }
