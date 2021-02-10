@@ -19,11 +19,14 @@ class InfoViolenciaPage extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
       ),
-      body: Stack(
-        children: [
-          _fondo(sizeScreen),
-          _elements(sizeScreen, context, data),
-        ],
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            _fondo(sizeScreen),
+            _title(sizeScreen, data),
+            _elements(sizeScreen, context, data),
+          ],
+        ),
       ),
       bottomNavigationBar: var_utils.phoneBar,
     );
@@ -31,12 +34,12 @@ class InfoViolenciaPage extends StatelessWidget {
 
   Widget _fondo(Size sizeScreen) {
     return Container(
-      height: sizeScreen.height * .4,
+      height: sizeScreen.height * .35,
       width: sizeScreen.width,
       decoration: BoxDecoration(
         image: DecorationImage(
-          alignment: Alignment(0.0, 2.5),
-          image: AssetImage('assets/images/fondoSup.png'),
+          alignment: Alignment(0.0, 2.0),
+          image: AssetImage('assets/images/principal3.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -44,85 +47,53 @@ class InfoViolenciaPage extends StatelessWidget {
   }
 
   Widget _elements(Size sizeScreen, BuildContext context, data) {
-    return SingleChildScrollView(
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
-        child: FutureBuilder(
-          future:
-              _violenceProvider.getViolenceInfoDetail(data["id"].toString()),
-          builder:
-              (BuildContext context, AsyncSnapshot<InfoViolencia> snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                children: [
-                  SizedBox(
-                    height: sizeScreen.height * 0.02,
-                  ),
-                  _title(snapshot.data.title),
-                  SizedBox(
-                    height: sizeScreen.height * 0.1,
-                  ),
-                  _imgVcero(sizeScreen),
-                  SizedBox(
-                    height: sizeScreen.height * 0.05,
-                  ),
-                  _description(snapshot.data.description),
-                  SizedBox(
-                    height: sizeScreen.height * 0.06,
-                  ),
-                  _buttonLink(context, snapshot.data.url),
-                ],
-              );
-            } else {
-              return Column(
-                children: [
-                  SizedBox(
-                    height: sizeScreen.height * 0.02,
-                  ),
-                  _title(data["title"]),
-                  SizedBox(
-                    height: sizeScreen.height * 0.1,
-                  ),
-                  _imgVcero(sizeScreen),
-                  SizedBox(
-                    height: sizeScreen.height * 0.05,
-                  ),
-                  Center(
-                    child: CircularProgressIndicator(),
-                  )
-                ],
-              );
-            }
-          },
-        ),
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(top: sizeScreen.height * 0.05),
+      child: FutureBuilder(
+        future: _violenceProvider.getViolenceInfoDetail(data["id"].toString()),
+        builder: (BuildContext context, AsyncSnapshot<InfoViolencia> snapshot) {
+          if (snapshot.hasData) {
+            return Column(
+              children: [
+                SizedBox(
+                  height: sizeScreen.height * 0.32,
+                ),
+                _description(snapshot.data.description),
+                SizedBox(
+                  height: sizeScreen.height * 0.06,
+                ),
+                _buttonLink(context, snapshot.data.url),
+              ],
+            );
+          } else {
+            return Column(
+              children: [
+                SizedBox(
+                  height: sizeScreen.height * 0.4,
+                ),
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+              ],
+            );
+          }
+        },
       ),
     );
   }
 
-  Widget _title(String title) {
+  Widget _title(Size sizeScreen, data) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      width: double.infinity,
+      padding: EdgeInsets.only(top: sizeScreen.height * 0.06),
       child: Text(
-        title,
+        data["title"],
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.white,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
-  Widget _imgVcero(Size sizeScreen) {
-    return Container(
-      child: Material(
-        elevation: 12.0,
-        shape: CircleBorder(),
-        child: Image(
-          width: sizeScreen.width * 0.30,
-          image: AssetImage('assets/images/principal1.png'),
         ),
       ),
     );
@@ -137,8 +108,8 @@ class InfoViolenciaPage extends StatelessWidget {
         style: TextStyle(
           color: var_utils.colors[1],
           fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-          height: 1.4,
+          //fontWeight: FontWeight.bold,
+          //height: 1.2,
         ),
       ),
     );

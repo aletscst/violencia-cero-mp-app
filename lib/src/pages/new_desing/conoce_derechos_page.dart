@@ -27,12 +27,12 @@ class ConoceDerechosPage extends StatelessWidget {
 
   Widget _fondo(Size sizeScreen) {
     return Container(
-      height: sizeScreen.height * .35,
+      height: sizeScreen.height * .30,
       width: sizeScreen.width,
       decoration: BoxDecoration(
         image: DecorationImage(
           alignment: Alignment(0.0, 2.5),
-          image: AssetImage('assets/images/fondoSup.png'),
+          image: AssetImage('assets/images/principal3.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -42,16 +42,9 @@ class ConoceDerechosPage extends StatelessWidget {
   Widget _elements(Size sizeScreen, BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(top: sizeScreen.height * 0.06),
+      padding: EdgeInsets.only(top: sizeScreen.height * 0.30),
       child: Column(
         children: [
-          SizedBox(
-            height: sizeScreen.height * 0.04,
-          ),
-          _imgVcero(sizeScreen),
-          SizedBox(
-            height: sizeScreen.height * 0.04,
-          ),
           _derechosText(),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 50.0),
@@ -69,28 +62,17 @@ class ConoceDerechosPage extends StatelessWidget {
     );
   }
 
-  Widget _imgVcero(Size sizeScreen) {
-    return Container(
-      child: Material(
-        elevation: 12.0,
-        shape: CircleBorder(),
-        child: Image(
-          width: sizeScreen.width * 0.25,
-          image: AssetImage('assets/images/principal1.png'),
-        ),
-      ),
-    );
-  }
-
   Widget _derechosText() {
     return Container(
       child: Text(
         'Conoce tus derechos',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 35.0,
-            color: Color.fromRGBO(140, 99, 218, 1.0),
-            fontWeight: FontWeight.bold),
+          fontSize: 35.0,
+          //fontFamily: 'Poppins',
+          color: Color.fromRGBO(140, 99, 218, 1.0),
+          //fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -108,9 +90,11 @@ class ConoceDerechosPage extends StatelessWidget {
             'como mujer. ¡Conócelos y utilízalos!',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: 15.0,
-            color: Color.fromRGBO(140, 99, 218, 1.0),
-            fontWeight: FontWeight.bold),
+          fontSize: 15.0,
+          //fontFamily: 'Poppins',
+          color: Color.fromRGBO(140, 99, 218, 1.0),
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

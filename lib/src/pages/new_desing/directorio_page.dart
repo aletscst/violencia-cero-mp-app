@@ -35,12 +35,12 @@ class _DirectorioPageState extends State<DirectorioPage> {
 
   Widget _fondo(Size sizeScreen) {
     return Container(
-      height: sizeScreen.height * .35,
+      height: sizeScreen.height * .30,
       width: sizeScreen.width,
       decoration: BoxDecoration(
         image: DecorationImage(
           alignment: Alignment(0.0, 2.5),
-          image: AssetImage('assets/images/fondoSup.png'),
+          image: AssetImage('assets/images/principal3.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -54,27 +54,10 @@ class _DirectorioPageState extends State<DirectorioPage> {
       child: Column(
         children: [
           SizedBox(
-            height: sizeScreen.height * 0.04,
-          ),
-          _imgVcero(sizeScreen),
-          SizedBox(
-            height: sizeScreen.height * 0.02,
+            height: sizeScreen.height * 0.25,
           ),
           _directorioText(),
         ],
-      ),
-    );
-  }
-
-  Widget _imgVcero(Size sizeScreen) {
-    return Container(
-      child: Material(
-        elevation: 12.0,
-        shape: CircleBorder(),
-        child: Image(
-          width: sizeScreen.width * 0.25,
-          image: AssetImage('assets/images/principal1.png'),
-        ),
       ),
     );
   }
@@ -97,7 +80,7 @@ class _DirectorioPageState extends State<DirectorioPage> {
       builder: (BuildContext context, AsyncSnapshot<AttentionCenter> snapshot) {
         if (snapshot.hasData) {
           return ListView(
-            padding: EdgeInsets.only(top: sizeScreen.height * 0.4),
+            padding: EdgeInsets.only(top: sizeScreen.height * 0.40),
             children: _fillAttCentsList(context, snapshot.data),
           );
         } else {

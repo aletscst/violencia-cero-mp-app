@@ -97,7 +97,7 @@ class InicioPage extends StatelessWidget {
         elevation: 12.0,
         shape: CircleBorder(),
         child: Image(
-          width: sizeScreen.width * 0.25,
+          width: sizeScreen.width * 0.28,
           image: AssetImage('assets/images/principal1.png'),
         ),
       ),
