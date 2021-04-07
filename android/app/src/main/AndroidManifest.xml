@@ -7,8 +7,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="violencia_cero"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Violencia Cero"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -43,5 +43,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAszelz6o2kK3sfrSEjotpIi4g7upcue7M"/>
     </application>
 </manifest>
