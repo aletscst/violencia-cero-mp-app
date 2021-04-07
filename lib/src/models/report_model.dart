@@ -37,17 +37,17 @@ class Report {
 }
 
 class Denunciado {
-  Denunciado({
-    this.nombres = '',
-    this.apellidoPaterno = '',
-    this.apellidoMaterno = '',
-    this.parentesco = '',
-    this.edad = 20,
-    this.ocupacion = '',
-    this.domicilio = '',
-    this.codigoPostal = '',
-    this.tipoViolencia = '',
-  });
+  Denunciado(
+      {this.nombres = '',
+      this.apellidoPaterno = '',
+      this.apellidoMaterno = '',
+      this.parentesco = '',
+      this.edad = 20,
+      this.ocupacion = '',
+      this.domicilio = '',
+      this.codigoPostal = '',
+      this.tipoViolencia = '',
+      this.genero = ''});
 
   String nombres;
   String apellidoPaterno;
@@ -58,6 +58,7 @@ class Denunciado {
   String domicilio;
   String codigoPostal;
   String tipoViolencia;
+  String genero;
 
   factory Denunciado.fromJson(Map<String, dynamic> json) => Denunciado(
         nombres: json["nombres"],
@@ -69,6 +70,7 @@ class Denunciado {
         domicilio: json["domicilio"],
         codigoPostal: json["codigoPostal"],
         tipoViolencia: json["tipoViolencia"],
+        genero: json["genero"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -81,6 +83,7 @@ class Denunciado {
         "domicilio": domicilio,
         "codigoPostal": codigoPostal,
         "tipoViolencia": tipoViolencia,
+        "genero": genero,
       };
 }
 

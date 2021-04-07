@@ -22,11 +22,13 @@ class _DirectorioPageState extends State<DirectorioPage> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
       ),
-      body: Stack(
+      body: Column(
         children: [
           _fondo(sizeScreen),
           _elements(sizeScreen, context),
-          _getAttentionCenters(sizeScreen, context)
+          Expanded(
+            child: _getAttentionCenters(sizeScreen, context),
+          )
         ],
       ),
       bottomNavigationBar: var_utils.phoneBar,
@@ -50,12 +52,8 @@ class _DirectorioPageState extends State<DirectorioPage> {
   Widget _elements(Size sizeScreen, BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(top: sizeScreen.height * 0.06),
       child: Column(
         children: [
-          SizedBox(
-            height: sizeScreen.height * 0.25,
-          ),
           _directorioText(),
         ],
       ),
@@ -67,9 +65,10 @@ class _DirectorioPageState extends State<DirectorioPage> {
       child: Text(
         'Directorio',
         style: TextStyle(
-            fontSize: 35.0,
-            color: Color.fromRGBO(140, 99, 218, 1.0),
-            fontWeight: FontWeight.bold),
+          fontSize: 35.0,
+          color: Color.fromRGBO(140, 99, 218, 1.0),
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -80,7 +79,7 @@ class _DirectorioPageState extends State<DirectorioPage> {
       builder: (BuildContext context, AsyncSnapshot<AttentionCenter> snapshot) {
         if (snapshot.hasData) {
           return ListView(
-            padding: EdgeInsets.only(top: sizeScreen.height * 0.40),
+            padding: EdgeInsets.symmetric(vertical: 5.0),
             children: _fillAttCentsList(context, snapshot.data),
           );
         } else {
@@ -96,11 +95,12 @@ class _DirectorioPageState extends State<DirectorioPage> {
       BuildContext context, AttentionCenter attCentsList) {
     List<Widget> attCents = new List<Widget>();
     final sizeScreen = MediaQuery.of(context).size;
-
+    var indexColors = 0;
     for (var i = 0; i < attCentsList.data.length; i++) {
+      if (indexColors == var_utils.colors.length) indexColors = 0;
       final tempAttCent = ListTile(
         leading: CircleAvatar(
-          backgroundColor: var_utils.colors[i],
+          backgroundColor: var_utils.colors[indexColors],
           child: Icon(
             Icons.pin_drop,
             color: Colors.white,
@@ -110,17 +110,18 @@ class _DirectorioPageState extends State<DirectorioPage> {
         title: Text(
           attCentsList.data[i].nombre,
           style: TextStyle(
-              color: var_utils.colors[i],
+              color: var_utils.colors[indexColors],
               fontSize: 15.0,
               fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           attCentsList.data[i].descripcion,
-          style: TextStyle(color: var_utils.colors[i], fontSize: 12.0),
+          style:
+              TextStyle(color: var_utils.colors[indexColors], fontSize: 12.0),
         ),
         trailing: Icon(
           Icons.keyboard_arrow_right,
-          color: var_utils.colors[i],
+          color: var_utils.colors[indexColors],
         ),
         onTap: () => {
           Navigator.pushNamed(context, 'attention',
@@ -136,7 +137,7 @@ class _DirectorioPageState extends State<DirectorioPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  color: var_utils.colors[i],
+                  color: var_utils.colors[indexColors],
                   width: sizeScreen.width - 10,
                   child: Column(
                     children: [
@@ -161,6 +162,7 @@ class _DirectorioPageState extends State<DirectorioPage> {
         ),
       );
       attCents.add(cardTemp);
+      indexColors++;
     }
     return attCents;
   }

@@ -12,6 +12,7 @@ class DenunciadoPage extends StatefulWidget {
 
 class _DenunciadoPageState extends State<DenunciadoPage> {
   final formKey = GlobalKey<FormState>();
+  String _genderOpc = '';
 
   final Report _report = new Report();
   final denunciado = new Denunciado();
@@ -59,22 +60,26 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
             SizedBox(height: 10.0),
             _name(),
             SizedBox(height: 10.0),
-            _lastNameP(),
+            _gender(),
             SizedBox(height: 10.0),
-            _lastNameM(),
+            _specificGender(),
             SizedBox(height: 10.0),
-            _relationship(),
-            SizedBox(height: 10.0),
-            _specificRelationship(),
-            SizedBox(height: 10.0),
+            //_lastNameP(),
+            //SizedBox(height: 10.0),
+            //_lastNameM(),
+            //SizedBox(height: 10.0),
+            //_relationship(),
+            //SizedBox(height: 10.0),
+            //_specificRelationship(),
+            //SizedBox(height: 10.0),
             _age(),
-            SizedBox(height: 10.0),
-            _employment(),
-            SizedBox(height: 10.0),
-            _adress(),
-            SizedBox(height: 10.0),
-            _cp(),
-            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
+            //_employment(),
+            //SizedBox(height: 10.0),
+            //_adress(),
+            //SizedBox(height: 10.0),
+            //_cp(),
+            //SizedBox(height: 10.0),
             _violenceType(),
             SizedBox(height: 20.0),
             _registerButton(),
@@ -90,7 +95,7 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
       child: TextFormField(
         initialValue: denunciado.nombres,
         decoration: InputDecoration(
-          labelText: 'Nombre',
+          labelText: 'Nombre(s) o seudónimo:',
           icon: Icon(
             Icons.account_circle,
             color: Colors.purple[300],
@@ -189,7 +194,7 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
       child: DropdownButtonFormField(
         value: denunciado.edad.toString(),
         decoration: InputDecoration(
-          labelText: 'Edad',
+          labelText: 'Edad aproximada',
           icon: Icon(
             Icons.calendar_today,
             color: Colors.purple[300],
@@ -270,71 +275,185 @@ class _DenunciadoPageState extends State<DenunciadoPage> {
     );
   }
 
+  Widget _gender() {
+    return Container(
+      padding: EdgeInsets.only(right: 150.0),
+      child: DropdownButtonFormField(
+        value: 'Hombre',
+        decoration: InputDecoration(
+          labelText: 'Genero',
+          icon: Icon(
+            Icons.wc,
+            color: Colors.purple[300],
+          ),
+        ),
+        items: ['Mujer', 'Hombre', 'Otro']
+            .map((gender) => DropdownMenuItem(
+                  child: Text(gender),
+                  value: gender,
+                ))
+            .toList(),
+        onChanged: (value) {
+          if (value != 'Otro') {
+            denunciado.genero = value;
+          }
+          setState(() {
+            _genderOpc = value;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _specificGender() {
+    return Visibility(
+      visible: _genderOpc == 'Otro',
+      child: TextFormField(
+        initialValue: denunciado.genero,
+        decoration: InputDecoration(
+          labelText: 'Especifique Genero',
+          icon: Icon(
+            Icons.wc,
+            color: Colors.purple[300],
+          ),
+        ),
+        validator: (value) => value.length < 3 ? 'Campo Obligatorio' : null,
+        onSaved: (value) => denunciado.genero = value,
+      ),
+    );
+  }
+
   Widget _violenceType() {
     return Container(
       child: Column(
         children: <Widget>[
           Text(
-            '¿Que tipo de Violencia ejercio?',
+            '¿Qué tipo de violencia ejerció?',
             style: TextStyle(fontSize: 17.0),
           ),
           CheckboxListTile(
-            title: Text('Fisica'),
-            value: _violenceSelect.contains('Fisica'),
+            title: Text('Violencia digital'),
+            value: _violenceSelect.contains('Violencia digital'),
             onChanged: (select) {
               setState(() {
                 if (select)
-                  _violenceSelect.add('Fisica');
+                  _violenceSelect.add('Violencia digital');
                 else
-                  _violenceSelect.remove('Fisica');
+                  _violenceSelect.remove('Violencia digital');
               });
             },
           ),
           CheckboxListTile(
-            title: Text('Sexual'),
-            value: _violenceSelect.contains('Sexual'),
+            title: Text('Violencia Física'),
+            value: _violenceSelect.contains('Violencia Física'),
             onChanged: (select) {
               setState(() {
                 if (select)
-                  _violenceSelect.add('Sexual');
+                  _violenceSelect.add('Violencia Física');
                 else
-                  _violenceSelect.remove('Sexual');
+                  _violenceSelect.remove('Violencia Física');
               });
             },
           ),
           CheckboxListTile(
-            title: Text('Verbal'),
-            value: _violenceSelect.contains('Verbal'),
+            title: Text('Violencia Patrimonial'),
+            value: _violenceSelect.contains('Violencia Patrimonial'),
             onChanged: (select) {
               setState(() {
                 if (select)
-                  _violenceSelect.add('Verbal');
+                  _violenceSelect.add('Violencia Patrimonial');
                 else
-                  _violenceSelect.remove('Verbal');
+                  _violenceSelect.remove('Violencia Patrimonial');
               });
             },
           ),
           CheckboxListTile(
-            title: Text('Psicologica'),
-            value: _violenceSelect.contains('Psicologica'),
+            title: Text('Violencia Económica'),
+            value: _violenceSelect.contains('Violencia Económica'),
             onChanged: (select) {
               setState(() {
                 if (select)
-                  _violenceSelect.add('Psicologica');
+                  _violenceSelect.add('Violencia Económica');
                 else
-                  _violenceSelect.remove('Psicologica');
+                  _violenceSelect.remove('Violencia Económica');
               });
             },
           ),
           CheckboxListTile(
-            title: Text('Familiar'),
-            value: _violenceSelect.contains('Familiar'),
+            title: Text('Violencia Sexual'),
+            value: _violenceSelect.contains('Violencia Sexual'),
             onChanged: (select) {
               setState(() {
                 if (select)
-                  _violenceSelect.add('Familiar');
+                  _violenceSelect.add('Violencia Sexual');
                 else
-                  _violenceSelect.remove('Familiar');
+                  _violenceSelect.remove('Violencia Sexual');
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Violencia contra los Derechos Reproductivos'),
+            value: _violenceSelect
+                .contains('Violencia contra los Derechos Reproductivos'),
+            onChanged: (select) {
+              setState(() {
+                if (select)
+                  _violenceSelect
+                      .add('Violencia contra los Derechos Reproductivos');
+                else
+                  _violenceSelect
+                      .remove('Violencia contra los Derechos Reproductivos');
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Violencia Feminicida'),
+            value: _violenceSelect.contains('Violencia Feminicida'),
+            onChanged: (select) {
+              setState(() {
+                if (select)
+                  _violenceSelect.add('Violencia Feminicida');
+                else
+                  _violenceSelect.remove('Violencia Feminicida');
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Violencia Psicoemocional'),
+            value: _violenceSelect.contains('Violencia Psicoemocional'),
+            onChanged: (select) {
+              setState(() {
+                if (select)
+                  _violenceSelect.add('Violencia Psicoemocional');
+                else
+                  _violenceSelect.remove('Violencia Psicoemocional');
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Violencia Simbólica'),
+            value: _violenceSelect.contains('Violencia Simbólica'),
+            onChanged: (select) {
+              setState(() {
+                if (select)
+                  _violenceSelect.add('Violencia Simbólica');
+                else
+                  _violenceSelect.remove('Violencia Simbólica');
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Violencia en la Gestación, Parto o Lactancia'),
+            value: _violenceSelect
+                .contains('Violencia en la Gestación, Parto o Lactancia'),
+            onChanged: (select) {
+              setState(() {
+                if (select)
+                  _violenceSelect
+                      .add('Violencia en la Gestación, Parto o Lactancia');
+                else
+                  _violenceSelect
+                      .remove('Violencia en la Gestación, Parto o Lactancia');
               });
             },
           ),

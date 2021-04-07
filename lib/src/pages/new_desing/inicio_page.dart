@@ -120,7 +120,7 @@ class InicioPage extends StatelessWidget {
     return RaisedButton(
       child: Container(
         child: Text(
-          'DENUNCIA',
+          'INFORMATE',
           style: TextStyle(fontSize: 20.0),
         ),
       ),

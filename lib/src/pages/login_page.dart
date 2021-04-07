@@ -74,11 +74,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 30.0),
             Text(
-              'Login',
+              'Iniciar sesión',
               style: TextStyle(fontSize: 30.0, color: Colors.purple[300]),
             ),
             Text(
-              'Para levantar una denuncia por favor inicia sesion',
+              'Para poder asesorarte por favor inicia sesión',
               style: TextStyle(color: Colors.grey),
             ),
             SizedBox(height: 50.0),

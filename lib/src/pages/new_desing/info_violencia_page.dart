@@ -119,7 +119,7 @@ class InfoViolenciaPage extends StatelessWidget {
     return RaisedButton(
       child: Container(
         child: Text(
-          'Denuncia Digital',
+          'INFORMATE',
           style: TextStyle(fontSize: 20.0),
         ),
       ),

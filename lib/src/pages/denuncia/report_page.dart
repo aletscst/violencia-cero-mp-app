@@ -59,8 +59,8 @@ class _ReportPageState extends State<ReportPage> {
             SizedBox(height: 10.0),
             _problem(),
             SizedBox(height: 10.0),
-            _help(),
-            SizedBox(height: 20.0),
+            //_help(),
+            //SizedBox(height: 20.0),
             _registerButton(),
             SizedBox(height: 20.0),
           ],
@@ -167,7 +167,7 @@ class _ReportPageState extends State<ReportPage> {
     resp.then((response) {
       if (response.status) {
         final DataSuccess success = new DataSuccess(
-            message: 'Denuncia Enviada\n Nos comunicaremos contigo pronto',
+            message: 'Información Enviada\n Nos comunicaremos contigo pronto',
             route1: 'inicio',
             route2: 'home');
         Navigator.pushReplacementNamed(context, 'success', arguments: success);

@@ -63,12 +63,12 @@ class _RegisterPageState extends State<RegisterPage> {
           children: <Widget>[
             SizedBox(height: 10.0),
             _nameField(),
-            SizedBox(height: 10.0),
-            _lastNamePField(),
-            SizedBox(height: 10.0),
-            _lastNameMField(),
-            SizedBox(height: 10.0),
-            _phoneField(),
+            //SizedBox(height: 10.0),
+            //_lastNamePField(),
+            //SizedBox(height: 10.0),
+            //_lastNameMField(),
+            //SizedBox(height: 10.0),
+            //_phoneField(),
             SizedBox(height: 10.0),
             _emailField(),
             SizedBox(height: 10.0),
@@ -94,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
         autofocus: true,
         initialValue: register.nombre,
         decoration: InputDecoration(
-          labelText: 'Nombre',
+          labelText: 'Nombre(s) o Seudónimo',
           icon: Icon(
             Icons.account_circle,
             color: Colors.purple[300],
@@ -262,23 +262,16 @@ class _RegisterPageState extends State<RegisterPage> {
           text: TextSpan(
             style: defaultStyle,
             children: <TextSpan>[
-              TextSpan(text: 'He leído y Acepto los '),
               TextSpan(
-                text: 'Terminos y Condiciones',
+                  text: 'He leído y acepto los términos y condiciones del '),
+              TextSpan(
+                text: 'aviso de privacidad ',
                 style: linkStyle,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => launch(
-                      'http://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf?utm_pais=mexico'),
+                      'https://www.milpa-alta.cdmx.gob.mx/avisoprivacidadDH.pdf'),
               ),
-              TextSpan(text: ', así como el '),
-              TextSpan(
-                text: 'Aviso de Privacidad',
-                style: linkStyle,
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () => launch(
-                      'http://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf?utm_pais=mexico'),
-              ),
-              TextSpan(text: ' sobre el uso de esta aplicación.'),
+              TextSpan(text: 'sobre el uso de esta aplicación.'),
             ],
           ),
         ),

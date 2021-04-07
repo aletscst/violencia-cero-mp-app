@@ -57,10 +57,10 @@ class _SolicitantePageState extends State<SolicitantePage> {
             SizedBox(height: 10.0),
             _name(),
             SizedBox(height: 10.0),
-            _lastNameP(),
-            SizedBox(height: 10.0),
-            _lastNameM(),
-            SizedBox(height: 10.0),
+            //_lastNameP(),
+            //SizedBox(height: 10.0),
+            //_lastNameM(),
+            //SizedBox(height: 10.0),
             _gender(),
             SizedBox(height: 10.0),
             _specificGender(),
@@ -69,22 +69,22 @@ class _SolicitantePageState extends State<SolicitantePage> {
             SizedBox(height: 10.0),
             _tel(),
             SizedBox(height: 10.0),
-            _birthPlace(),
-            SizedBox(height: 10.0),
-            _adress(),
-            SizedBox(height: 10.0),
+            //_birthPlace(),
+            //SizedBox(height: 10.0),
+            //_adress(),
+            //SizedBox(height: 10.0),
             _cp(),
             SizedBox(height: 10.0),
-            _scholarship(),
-            SizedBox(height: 10.0),
-            _specificScolarShip(),
-            SizedBox(height: 10.0),
-            _maritalStatus(),
-            SizedBox(height: 10.0),
-            _specificMaritalStatus(),
-            SizedBox(height: 10.0),
-            _employment(),
-            SizedBox(height: 20.0),
+            //_scholarship(),
+            //SizedBox(height: 10.0),
+            //_specificScolarShip(),
+            //SizedBox(height: 10.0),
+            //_maritalStatus(),
+            //SizedBox(height: 10.0),
+            //_specificMaritalStatus(),
+            //SizedBox(height: 10.0),
+            //_employment(),
+            //SizedBox(height: 20.0),
             _registerButton(),
             SizedBox(height: 20.0),
           ],
@@ -98,7 +98,7 @@ class _SolicitantePageState extends State<SolicitantePage> {
       child: TextFormField(
         initialValue: solicitante.nombres,
         decoration: InputDecoration(
-          labelText: 'Nombre',
+          labelText: 'Nombre(s) o Seudónimo',
           icon: Icon(
             Icons.account_circle,
             color: Colors.purple[300],
@@ -234,15 +234,6 @@ class _SolicitantePageState extends State<SolicitantePage> {
             color: Colors.purple[300],
           ),
         ),
-        validator: (value) {
-          if (!utils.isNumeric(value)) {
-            return 'Solo se aceptan numeros';
-          }
-          if (value.length < 8) {
-            return 'Ingrese un Numero Valido';
-          }
-          return null;
-        },
         onSaved: (value) => solicitante.telefono = value,
       ),
     );

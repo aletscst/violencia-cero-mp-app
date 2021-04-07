@@ -99,7 +99,7 @@ final BottomAppBar phoneBar = BottomAppBar(
           icon: Image(
             image: AssetImage('assets/icons/tel.png'),
           ),
-          onPressed: () => launch('tel:5558623494'),
+          onPressed: () => launch('tel:5543236808'),
         ),
         IconButton(
           icon: Image(
@@ -107,14 +107,14 @@ final BottomAppBar phoneBar = BottomAppBar(
           ),
           onPressed: () async {
             if (Platform.isIOS) {
-              final whatsappUrl = 'whatsapp://wa.me/525543236768';
+              final whatsappUrl = 'whatsapp://wa.me/5543236808';
               await canLaunch(whatsappUrl)
                   ? launch(whatsappUrl)
                   : print(
                       "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
             } else {
               final whatsappUrl =
-                  'whatsapp://send?text=Hola&phone=+525543236768&abid=+525543236768';
+                  'whatsapp://send?text=Hola&phone=+525543236808&abid=+525543236808';
               await canLaunch(whatsappUrl)
                   ? launch(whatsappUrl)
                   : print(
