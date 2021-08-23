@@ -234,7 +234,7 @@ class ConoceDerechosPage extends StatelessWidget {
             width: sizeScreen.width * 0.6,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'Leyes e Instrumento Internacionales Sobre Igualdad y Perspectiva de Género',
+              'Leyes e Instrumentos Internacionales Sobre Igualdad y Perspectiva de Género',
               style: TextStyle(
                   color: var_utils.colors[1], fontWeight: FontWeight.bold),
             ),
